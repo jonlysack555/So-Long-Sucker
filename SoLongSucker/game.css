@@ -55,28 +55,414 @@
   border-radius: 40px;
   border-width: 2px;
   position: absolute;
-  width: 46%;
-  height: 30%;
-  left: 27%;
-  top: 35%;
+  width: 40%;
+  height: 36%;
+  left: 30%;
+  top: 32%;
 }
 
 .chip {
-  width: 14.29%;
-  height: 25%;
+  width: 13%;
+  height: 24%;
   border-radius: 50%;
-  border: transparent;
+  border-width: 2px;
+  border-color: white;
+  border-style: dotted;
   position: absolute;
 }
 
 #chipOne {
-
+  left: 1%;
+  top: 0%;
 }
 
 #chipTwo {
-  left: 15px;
+  left: 15%;
+  top: 0%;
+}
+
+#chipThree {
+  left: 29%;
+  top: 0%;
+}
+
+#chipFour {
+  left: 43%;
+  top: 0%;
+}
+
+#chipFive {
+  left: 57%;
+  top: 0%;
+}
+
+#chipSix {
+  left: 71%;
+  top: 0%;
+}
+
+#chipSeven {
+  left: 85%;
+  top: 0%;
+}
+
+#chipEight {
+  left: 1%;
+  top: 25%;
+}
+
+#chipNine {
+  left: 15%;
+  top: 25%;
+}
+
+#chipTen {
+  left: 29%;
+  top: 25%;
+}
+
+#chipEleven {
+  left: 43%;
+  top: 25%;
+}
+
+#chipTwelve {
+  left: 57%;
+  top: 25%;
+}
+
+#chipThirteen {
+  left: 71%;
+  top: 25%;
+}
+
+#chipFourteen {
+  left: 85%;
+  top: 25%;
+}
+
+#chipFifteen {
+  left: 1%;
+  top: 50%;
+}
+
+#chipSixteen {
+  left: 15%;
+  top: 50%;
+}
+
+#chipSeventeen {
+  left: 29%;
+  top: 50%;
+}
+
+#chipEighteen {
+  left: 43%;
+  top: 50%;
 }
 
 #chipNineteen {
-  left: 30px;
+  left: 57%;
+  top: 50%;
+}
+
+#chipTwenty {
+  left: 71%;
+  top: 50%;
+}
+
+#chipTwentyone {
+  left: 85%;
+  top: 50%;
+}
+
+#chipTwentytwo {
+  left: 1%;
+  top: 75%;
+}
+
+#chipTwentythree {
+  left: 15%;
+  top: 75%;
+}
+
+#chipTwentyfour {
+  left: 29%;
+  top: 75%;
+}
+
+#chipTwentyfive {
+  left: 43%;
+  top: 75%;
+}
+
+#chipTwentysix {
+  left: 57%;
+  top: 75%;
+}
+
+#chipTwentyseven {
+  left: 71%;
+  top: 75%;
+}
+
+#chipTwentyeight {
+  left: 85%;
+  top: 75%;
+}
+
+.name {
+  color: white;
+  font-size: 40px;
+  position: absolute;
+}
+
+#playOneName {
+  top: -25px;
+  left: 15px;
+}
+
+#playTwoName {
+  transform: rotate(90deg);
+  right: -5px;
+  top: 5px;
+}
+
+#playThreeName {
+  transform: rotate(180deg);
+  right: 15px;
+  bottom: -25px;
+}
+
+#playFourName {
+  transform: rotate(270deg);
+  bottom: 0px;
+  left: 5px;
+}
+
+.chipOne, .chipTwo, .chipThree, .chipFour {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.chipCountOne, .chipCountTwo, .chipCountThree, .chipCountFour {
+  font-size: 60px;
+  color: white;
+  width: 80px;
+  text-align: center;
+  position: absolute;
+}
+
+#redChipOne {
+  top: 50%;
+  left: 15%;
+}
+
+#blueChipOne {
+  left: 35%;
+  top: 50%;
+}
+
+#greenChipOne {
+  left: 55%;
+  top: 50%;
+}
+
+#yellowChipOne {
+  left: 75%;
+  top: 50%;
+}
+
+#redChipCountOne {
+  top: 22%;
+  left: 15%;
+}
+
+#blueChipCountOne {
+  left: 35%;
+  top: 22%;
+}
+
+#greenChipCountOne {
+  left: 55%;
+  top: 22%;
+}
+
+#yellowChipCountOne {
+  left: 75%;
+  top: 22%;
+}
+
+#redChipTwo {
+  left: 8%;
+  top: 12%;
+}
+
+#blueChipTwo {
+  left: 8%;
+  top: 32%;
+}
+
+#greenChipTwo {
+  left: 8%;
+  top: 52%;
+}
+
+#yellowChipTwo {
+  left: 8%;
+  top: 72%;
+}
+
+.chipCountTwo {
+  transform: rotate(90deg);
+}
+
+#redChipCountTwo {
+  left: 8%;
+  top: 1%;
+}
+
+#blueChipCountTwo {
+  left: 8%;
+  top: 21%;
+}
+
+#greenChipCountTwo {
+  left: 8%;
+  top: 41%;
+}
+
+#yellowChipCountTwo {
+  left: 8%;
+  top: 61%;
+}
+
+#redChipThree {
+  left: 75%;
+  top: 10%;
+}
+
+#blueChipThree {
+  left: 55%;
+  top: 10%;
+}
+
+#greenChipThree {
+  left: 35%;
+  top: 10%;
+}
+
+#yellowChipThree {
+  left: 15%;
+  top: 10%;
+}
+
+.chipCountThree {
+  transform: rotate(180deg);
+}
+
+#redChipCountThree {
+  left: 75%;
+  bottom: 23%;
+}
+
+#blueChipCountThree {
+  left: 55%;
+  bottom: 23%;
+}
+
+#greenChipCountThree {
+  left: 35%;
+  bottom: 23%;
+}
+
+#yellowChipCountThree {
+  left: 15%;
+  bottom: 23%;
+}
+
+#redChipFour {
+  right: 8%;
+  bottom: 12%;
+}
+
+#blueChipFour {
+  right: 8%;
+  bottom: 32%;
+}
+
+#greenChipFour {
+  right: 8%;
+  bottom: 52%;
+}
+
+#yellowChipFour {
+  right: 8%;
+  bottom: 72%;
+}
+
+.chipCountFour {
+  transform: rotate(270deg);
+}
+
+#redChipCountFour {
+  right: 8%;
+  bottom: 1%;
+}
+
+#blueChipCountFour {
+  right: 8%;
+  bottom: 21%;
+}
+
+#greenChipCountFour {
+  right: 8%;
+  bottom: 41%;
+}
+
+#yellowChipCountFour {
+  right: 8%;
+  bottom: 61%;
+}
+
+.use {
+  opacity: 0.0;
+  position: absolute;
+}
+
+.turnPlate {
+  color: white;
+  position: absolute;
+  font-size: 50px;
+  font-weight: bold;
+  display: none;
+}
+
+#turnPlateOne {
+  right: 5%;
+  top: -25%;
+}
+
+#turnPlateTwo {
+  transform: rotate(90deg);
+  bottom: 10%;
+  right: -35%;
+}
+
+#turnPlateThree {
+  transform: rotate(180deg);
+  left: 5%;
+  bottom: -25%;
+}
+
+#turnPlateFour {
+  transform: rotate(270deg);
+  top: 10%;
+  left: -35%;
+}
+
+#final {
+  display: none;
 }
