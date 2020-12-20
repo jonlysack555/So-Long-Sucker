@@ -466,3 +466,48 @@
 #final {
   display: none;
 }
+
+.disTrade {
+  display: none;
+  width: 10%;
+  height: 10%;
+  background-color: white;
+  border-radius: 10px;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+  opacity: 0.8;
+}
+
+#discard {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+
+#discard:hover {
+  opacity: 1.0;
+  border-width: 2px;
+}
+
+#trade {
+  position: absolute;
+  top: 15%;
+  left: 40%;
+}
+
+#trade:hover {
+  opacity: 1.0;
+  border-width: 2px;
+}
+
+#done {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+#done:hover {
+  opacity: 1.0;
+  border-width: 2px;
+}

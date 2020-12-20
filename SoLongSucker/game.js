@@ -13,6 +13,13 @@ var turnUser = "";
 var place;
 var chipSlots = [document.getElementById("chipOne"), document.getElementById("chipTwo"), document.getElementById("chipThree"), document.getElementById("chipFour"), document.getElementById("chipFive"), document.getElementById("chipSix"), document.getElementById("chipSeven"), document.getElementById("chipEight"), document.getElementById("chipNine"), document.getElementById("chipTen"), document.getElementById("chipEleven"), document.getElementById("chipTwelve"), document.getElementById("chipThirteen"), document.getElementById("chipFourteen"), document.getElementById("chipFifteen"), document.getElementById("chipSixteen"), document.getElementById("chipSeventeen"), document.getElementById("chipEighteen"), document.getElementById("chipNineteen"), document.getElementById("chipTwenty"), document.getElementById("chipTwentyone"), document.getElementById("chipTwentytwo"), document.getElementById("chipTwentythree"), document.getElementById("chipTwentyfour"), document.getElementById("chipTwentyfive"), document.getElementById("chipTwentysix"), document.getElementById("chipTwentyseven"), document.getElementById("chipTwentyeight"), document.getElementById("final")]
 var stackHeight;
+var redChips = [document.getElementById("redChipCountOne"), document.getElementById("redChipCountTwo"), document.getElementById("redChipCountThree"), document.getElementById("redChipCountFour")]
+var blueChips = [document.getElementById("blueChipCountOne"), document.getElementById("blueChipCountTwo"), document.getElementById("blueChipCountThree"), document.getElementById("blueChipCountFour")]
+var greenChips = [document.getElementById("greenChipCountOne"), document.getElementById("greenChipCountTwo"), document.getElementById("greenChipCountThree"), document.getElementById("greenChipCountFour")]
+var yellowChips = [document.getElementById("yellowChipCountOne"), document.getElementById("yellowChipCountTwo"), document.getElementById("yellowChipCountThree"), document.getElementById("yellowChipCountFour")]
+var segment = "waiting";
+var temp = 0;
+var inStack = [false, false, false, false, ""];
 
 var reA = /[^a-zA-Z]/g;
 var reN = /[^0-9]/g;
@@ -103,6 +110,10 @@ if (start < 0.25) {
   turnUser = document.getElementById("playFourUserName").innerHTML;
 }
 
+if (userr == turnUser) {
+  segment = "placement";
+}
+
 const pubnub = new PubNub({
   publishKey: "pub-c-c03147c7-bee2-4479-8823-b5669448d70a",
   subscribeKey: "sub-c-a30a8486-3f1b-11eb-a233-facb2062b65c",
@@ -116,7 +127,108 @@ pubnub.subscribe({
 
 console.log(gameArray);
 
+pubnub.addListener({
+  message: function(event) {
+    console.log(event.message);
+    if (event.message[0] == "placeChip") {
+
+    } else if (event.message[0] == "stackChip") {
+
+    } else if (event.message[0] == "elimChip") {
+
+    } else if (event.message[0] == "discardChip") {
+
+    } else if (event.message[0] == "transferChip") {
+
+    } else if (event.message[0] == "newTurn") {
+
+    }
+  }
+});
+
 function stackChip() {
+  var c = -1;
+  var temper = "";
+  if (document.getElementById("playOneName").style.color == "red") {
+    inStack[0] = true;
+  } else if (document.getElementById("playOneName").style.color == "blue") {
+    inStack[1] = true;
+  } else if (document.getElementById("playOneName").style.color == "green") {
+    inStack[2] = true;
+  } else if (document.getElementById("playOneName").style.color == "yellow") {
+    inStack[3] = true;
+  }
+  if (place > 2) {
+    while ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3 || c == -1) {
+      console.log(chipSlots[place+c].src);
+      if ((chipSlots[place+c].src).includes("redChip.jpg")) {
+        if (inStack[1] == true && inStack[2] == true && inStack[3] == true && inStack[0] != true) {
+          temper = "red";
+        }
+        inStack[0] = true;
+      } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
+        if (inStack[1] != true && inStack[2] == true && inStack[3] == true && inStack[0] == true) {
+          temper = "blue";
+        }
+        inStack[1] = true;
+      } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
+        if (inStack[1] == true && inStack[2] != true && inStack[3] == true && inStack[0] == true) {
+          temper = "green";
+        }
+        inStack[2] = true;
+      } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
+        if (inStack[1] == true && inStack[2] == true && inStack[3] != true && inStack[0] == true) {
+          temper = "red";
+        }
+        inStack[3] = true;
+      }
+      if (inStack[0] == true && inStack[1] == true && inStack[2] == true && inStack[3] == true) {
+        inStack[4] = temper;
+      }
+      c -= 1;
+    }
+  } else if (place == 2) {
+    if ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3 || c == -1) {
+      if ((chipSlots[place-1].src).includes("redChip.jpg")) {
+        inStack[0] = true;
+      } else if ((chipSlots[place-1].src).includes("blueChip.jpg")) {
+        inStack[1] = true;
+      } else if ((chipSlots[place-1].src).includes("greenChip.jpg")) {
+        inStack[2] = true;
+      } else if ((chipSlots[place-1].src).includes("yellowChip.jpg")) {
+        inStack[3] = true;
+      }
+      if ((chipSlots[place-2].src).includes("redChip.jpg")) {
+        inStack[0] = true;
+      } else if ((chipSlots[place-2].src).includes("blueChip.jpg")) {
+        inStack[1] = true;
+      } else if ((chipSlots[place-2].src).includes("greenChip.jpg")) {
+        inStack[2] = true;
+      } else if ((chipSlots[place-2].src).includes("yellowChip.jpg")) {
+        inStack[3] = true;
+      }
+    } else {
+      if ((chipSlots[place-1].src).includes("redChip.jpg")) {
+        inStack[0] = true;
+      } else if ((chipSlots[place-1].src).includes("blueChip.jpg")) {
+        inStack[1] = true;
+      } else if ((chipSlots[place-1].src).includes("greenChip.jpg")) {
+        inStack[2] = true;
+      } else if ((chipSlots[place-1].src).includes("yellowChip.jpg")) {
+        inStack[3] = true;
+      }
+    }
+  } else {
+    if ((chipSlots[place-1].src).includes("redChip.jpg")) {
+      inStack[0] = true;
+    } else if ((chipSlots[place-1].src).includes("blueChip.jpg")) {
+      inStack[1] = true;
+    } else if ((chipSlots[place-1].src).includes("greenChip.jpg")) {
+      inStack[2] = true;
+    } else if ((chipSlots[place-1].src).includes("yellowChip.jpg")) {
+      inStack[3] = true;
+    }
+  }
   stackHeight = 1;
   while (chipSlots[place - stackHeight].src != "") {
     stackHeight += 1;
@@ -124,23 +236,38 @@ function stackChip() {
   stackHeight -= 1;
   if (JSON.parse(document.getElementById("redChipCountOne").innerHTML)>0) {
     document.getElementById("redChipCountOne").style.color = "blue";
-  } else if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
     document.getElementById("blueChipCountOne").style.color = "blue";
-  } else if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
     document.getElementById("greenChipCountOne").style.color = "blue";
-  } else if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
     document.getElementById("yellowChipCountOne").style.color = "blue";
   }
 }
 
 function placeChip() {
+  if (document.getElementById("playOneName").style.color == "red") {
+    inStack[0] = true;
+  } else if (document.getElementById("playOneName").style.color == "blue") {
+    inStack[1] = true;
+  } else if (document.getElementById("playOneName").style.color == "green") {
+    inStack[2] = true;
+  } else if (document.getElementById("playOneName").style.color == "yellow") {
+    inStack[3] = true;
+  }
   if (JSON.parse(document.getElementById("redChipCountOne").innerHTML)>0) {
     document.getElementById("redChipCountOne").style.color = "green";
-  } else if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
     document.getElementById("blueChipCountOne").style.color = "green";
-  } else if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
     document.getElementById("greenChipCountOne").style.color = "green";
-  } else if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
+  }
+  if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
     document.getElementById("yellowChipCountOne").style.color = "green";
   }
 }
@@ -192,12 +319,142 @@ function push() {
 }
 
 function capture(place) {
-  alert("captured");
+  console.log(place);
+  var player = 0;
+  if ((chipSlots[place].src).includes("redChip.jpg")) {
+    if (document.getElementById("playOneName").style.color == "red") {
+      player = 0;
+    } else if (document.getElementById("playTwoName").style.color == "red") {
+      player = 1;
+    } else if (document.getElementById("playThreeName").style.color == "red") {
+      player = 2;
+    } else if (document.getElementById("playFourName").style.color == "red") {
+      player = 3;
+    }
+  } else if ((chipSlots[place].src).includes("blueChip.jpg")) {
+    if (document.getElementById("playOneName").style.color == "blue") {
+      player = 0;
+    } else if (document.getElementById("playTwoName").style.color == "blue") {
+      player = 1;
+    } else if (document.getElementById("playThreeName").style.color == "blue") {
+      player = 2;
+    } else if (document.getElementById("playFourName").style.color == "blue") {
+      player = 3;
+    }
+  } else if ((chipSlots[place].src).includes("greenChip.jpg")) {
+    if (document.getElementById("playOneName").style.color == "green") {
+      player = 0;
+    } else if (document.getElementById("playTwoName").style.color == "green") {
+      player = 1;
+    } else if (document.getElementById("playThreeName").style.color == "green") {
+      player = 2;
+    } else if (document.getElementById("playFourName").style.color == "green") {
+      player = 3;
+    }
+  } else if ((chipSlots[place].src).includes("yellowChip.jpg")) {
+    if (document.getElementById("playOneName").style.color == "yellow") {
+      player = 0;
+    } else if (document.getElementById("playTwoName").style.color == "yellow") {
+      player = 1;
+    } else if (document.getElementById("playThreeName").style.color == "yellow") {
+      player = 2;
+    } else if (document.getElementById("playFourName").style.color == "yellow") {
+      player = 3;
+    }
+  }
+  var c = 0;
+  /*var temper = "";
+  if (document.getElementById("playOneName").style.color == "red") {
+    inStack[0] = true;
+  } else if (document.getElementById("playOneName").style.color == "blue") {
+    inStack[1] = true;
+  } else if (document.getElementById("playOneName").style.color == "green") {
+    inStack[2] = true;
+  } else if (document.getElementById("playOneName").style.color == "yellow") {
+    inStack[3] = true;
+  }*/
+  while ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3) {
+    /*if ((chipSlots[place+c].src).includes("redChip.jpg")) {
+      if (inStack[1] == true && inStack[2] == true && inStack[3] == true && inStack[0] != true) {
+        temper = "red";
+      }
+      inStack[0] = true;
+    } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
+      if (inStack[1] != true && inStack[2] == true && inStack[3] == true && inStack[0] == true) {
+        temper = "blue";
+      }
+      inStack[1] = true;
+    } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
+      if (inStack[1] == true && inStack[2] != true && inStack[3] == true && inStack[0] == true) {
+        temper = "green";
+      }
+      inStack[2] = true;
+    } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
+      if (inStack[1] == true && inStack[2] == true && inStack[3] != true && inStack[0] == true) {
+        temper = "red";
+      }
+      inStack[3] = true;
+    }
+    if (inStack[0] == true && inStack[1] == true && inStack[2] == true && inStack[3] == true) {
+      inStack[4] = temper;
+    }*/
+    c -= 1;
+  }
+  console.log(c);
+  while (c < 1) {
+    if ((chipSlots[place+c].src).includes("redChip.jpg")) {
+      redChips[player].innerHTML = JSON.stringify(JSON.parse(redChips[player].innerHTML)+1);
+      chipSlots[place+c].removeAttribute("src");
+      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+      } else {
+        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+      }
+      redChips[player].style.color = "red";
+    } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
+      blueChips[player].innerHTML = JSON.stringify(JSON.parse(blueChips[player].innerHTML)+1);
+      chipSlots[place+c].removeAttribute("src");
+      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+      } else {
+        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+      }
+      blueChips[player].style.color = "red";
+    } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
+      greenChips[player].innerHTML = JSON.stringify(JSON.parse(greenChips[player].innerHTML)+1);
+      chipSlots[place+c].removeAttribute("src");
+      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+      } else {
+        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+      }
+      greenChips[player].style.color = "red";
+    } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
+      yellowChips[player].innerHTML = JSON.stringify(JSON.parse(yellowChips[player].innerHTML)+1);
+      chipSlots[place+c].removeAttribute("src");
+      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+      } else {
+        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+      }
+      yellowChips[player].style.color = "red";
+    }
+    console.log(c);
+    c += 1;
+  }
 }
 
 document.getElementById("redChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "redChip.jpg";
   if (document.getElementById("redChipCountOne").style.color == "green") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["placeChip", "red", place, userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
     chipSlots[place - 1].src = "redChip.jpg";
     document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML) - 1);
     document.getElementById("redChipCountOne").style.color = "white";
@@ -205,6 +462,11 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("redChipCountOne").style.color == "blue") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["stackChip", "red", place, userr]
+  	});
+    segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
       chipSlots[place].src = "redChip.jpg";
@@ -214,9 +476,11 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
       if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+        segment = "capture";
         setTimeout(capture, 1500, place-1);
       }
     } else {
@@ -229,16 +493,75 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
     }
+    if (segment == "disTrade") {
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
+  } else if (document.getElementById("redChipCountOne").style.color == "red") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["elimChip", "red", userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
+    document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML)-1);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("redChipCountOne").style.color == "purple") {
+    var ad = JSON.parse(document.getElementById("redChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to discard:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    pubnub.publish({
+  		channel : "game",
+  		message : ["discardChip", "red", number, userr]
+  	});
+    document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("redChipCountOne").style.color == "yellow") {
+    var ad = JSON.parse(document.getElementById("redChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to transfer:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    temp = number;
+    temp = JSON.parse(temp);
+    document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML)-number);
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+    document.getElementById("playTwoName").style.background = "grey";
+    document.getElementById("playThreeName").style.background = "grey";
+    document.getElementById("playFourName").style.background = "grey";
   }
 });
 
 document.getElementById("blueChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "blueChip.jpg";
-  console.log("please");
   if (document.getElementById("blueChipCountOne").style.color == "green") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["placeChip", "blue", place, userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
     chipSlots[place - 1].src = "blueChip.jpg";
     document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML) - 1);
     document.getElementById("redChipCountOne").style.color = "white";
@@ -246,9 +569,12 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("blueChipCountOne").style.color == "blue") {
-    console.log("hello?");
+    pubnub.publish({
+  		channel : "game",
+  		message : ["stackChip", "blue", place, userr]
+  	});
+    segment = "disTrade";
     if (chipSlots[place].src != "") {
-      console.log("hi?");
       push();
       chipSlots[place].src = "blueChip.jpg";
       document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML) - 1);
@@ -257,9 +583,11 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
       if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+        segment = "capture";
         setTimeout(capture, 1500, place-1);
       }
     } else {
@@ -272,15 +600,75 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
     }
+    if (segment == "disTrade") {
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
+  } else if (document.getElementById("blueChipCountOne").style.color == "red") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["elimChip", "blue", userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
+    document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML)-1);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("blueChipCountOne").style.color == "purple") {
+    var ad = JSON.parse(document.getElementById("blueChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to discard:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    pubnub.publish({
+  		channel : "game",
+  		message : ["discardChip", "blue", number, userr]
+  	});
+    document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
+    var ad = JSON.parse(document.getElementById("blueChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to transfer:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    temp = number;
+    temp = JSON.parse(temp);
+    document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+    document.getElementById("playTwoName").style.background = "grey";
+    document.getElementById("playThreeName").style.background = "grey";
+    document.getElementById("playFourName").style.background = "grey";
   }
 });
 
 document.getElementById("greenChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "greenChip.jpg";
   if (document.getElementById("greenChipCountOne").style.color == "green") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["placeChip", "green", place, userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
     chipSlots[place - 1].src = "greenChip.jpg";
     document.getElementById("greenChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountOne").innerHTML) - 1);
     document.getElementById("redChipCountOne").style.color = "white";
@@ -288,6 +676,11 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("greenChipCountOne").style.color == "blue") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["stackChip", "green", place, userr]
+  	});
+    segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
       chipSlots[place].src = "greenChip.jpg";
@@ -297,9 +690,11 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
       if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+        segment = "capture";
         setTimeout(capture, 1500, place-1);
       }
     } else {
@@ -312,15 +707,75 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
     }
+    if (segment == "disTrade") {
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
+  } else if (document.getElementById("greenChipCountOne").style.color == "red") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["elimChip", "green", userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
+    document.getElementById("greenChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountOne").innerHTML)-1);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("greenChipCountOne").style.color == "purple") {
+    var ad = JSON.parse(document.getElementById("greenChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to discard:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    pubnub.publish({
+  		channel : "game",
+  		message : ["discardChip", "green", number, userr]
+  	});
+    document.getElementById("greenChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
+    var ad = JSON.parse(document.getElementById("greenChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to transfer:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    temp = number;
+    temp = JSON.parse(temp);
+    document.getElementById("greenChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+    document.getElementById("playTwoName").style.background = "grey";
+    document.getElementById("playThreeName").style.background = "grey";
+    document.getElementById("playFourName").style.background = "grey";
   }
 });
 
 document.getElementById("yellowChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "yellowChip.jpg";
   if (document.getElementById("yellowChipCountOne").style.color == "green") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["placeChip", "yellow", place, userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
     chipSlots[place - 1].src = "yellowChip.jpg";
     document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML) - 1);
     document.getElementById("redChipCountOne").style.color = "white";
@@ -328,6 +783,11 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("yellowChipCountOne").style.color == "blue") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["stackChip", "yellow", place, userr]
+  	});
+    segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
       chipSlots[place].src = "yellowChip.jpg";
@@ -337,9 +797,11 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
       if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+        segment = "capture";
         setTimeout(capture, 1500, place-1);
       }
     } else {
@@ -352,14 +814,386 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
       document.getElementById("greenChipCountOne").style.color = "white";
       document.getElementById("yellowChipCountOne").style.color = "white";
       if (chipSlots[place].src == chipSlots[place-1].src) {
+        segment = "capture";
         setTimeout(capture, 1500, place);
       }
+    }
+    if (segment == "disTrade") {
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
+  } else if (document.getElementById("yellowChipCountOne").style.color == "red") {
+    pubnub.publish({
+  		channel : "game",
+  		message : ["elimChip", "yellow", userr]
+  	});
+    segment = "disTrade";
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
+    document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)-1);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("yellowChipCountOne").style.color == "purple") {
+    var ad = JSON.parse(document.getElementById("yellowChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to discard:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    pubnub.publish({
+  		channel : "game",
+  		message : ["discardChip", "yellow", number, userr]
+  	});
+    document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
+    var ad = JSON.parse(document.getElementById("yellowChipCountOne").innerHTML);
+    var number = 0;
+    number = (function ask() {
+      var n = prompt('Enter how many to transfer:');
+      return isNaN(n) || +n > (ad) || +n < (0) ? ask() : n;
+    }());
+    temp = number;
+    temp = JSON.parse(temp);
+    document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)-number);
+    document.getElementById("redChipCountOne").style.color = "white";
+    document.getElementById("blueChipCountOne").style.color = "white";
+    document.getElementById("greenChipCountOne").style.color = "white";
+    document.getElementById("playTwoName").style.background = "grey";
+    document.getElementById("playThreeName").style.background = "grey";
+    document.getElementById("playFourName").style.background = "grey";
+  }
+});
+
+document.getElementById("playOneName").addEventListener("click", function() {
+  if (userr == turnUser) {
+    if (document.getElementById("playOneName").style.background == "white") {
+      pubnub.publish({
+    		channel : "game",
+    		message : ["newTurn", userr]
+    	});
+      document.getElementById("turnPlateOne").style.display = "none";
+      document.getElementById("turnPlateOne").style.display = "block";
+      segment = "waiting";
+      inStack = [false, false, false, false, ""];
+      turnUser = document.getElementById("playOneUserName").innerHTML;
+      document.getElementById("playOneName").style.background = "black";
+      document.getElementById("playTwoName").style.background = "black";
+      document.getElementById("playThreeName").style.background = "black";
+      document.getElementById("playFourName").style.background = "black";
     }
   }
 });
 
+document.getElementById("playTwoName").addEventListener("click", function() {
+  if (userr == turnUser) {
+    if (document.getElementById("playTwoName").style.background == "grey") {
+      if (document.getElementById("redChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "red", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      	});
+        document.getElementById("redChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountTwo").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("redChipCountOne").style.color = "white";
+      } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "blue", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      	});
+        document.getElementById("blueChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountTwo").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("blueChipCountOne").style.color = "white";
+      } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "green", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      	});
+        document.getElementById("greenChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountTwo").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("greenChipCountOne").style.color = "white";
+      } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "yellow", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      	});
+        document.getElementById("yellowChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountTwo").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("yellowChipCountOne").style.color = "white";
+      }
+    } else if (document.getElementById("playTwoName").style.background == "white") {
+      pubnub.publish({
+    		channel : "game",
+    		message : ["newTurn", document.getElementById("playTwoUserName")]
+    	});
+      inStack = [false, false, false, false, ""];
+      turnUser = document.getElementById("playTwoUserName").innerHTML;
+      document.getElementById("turnPlateOne").style.display = "none";
+      document.getElementById("turnPlateTwo").style.display = "block";
+      segment = "waiting";
+      document.getElementById("playOneName").style.background = "black";
+      document.getElementById("playTwoName").style.background = "black";
+      document.getElementById("playThreeName").style.background = "black";
+      document.getElementById("playFourName").style.background = "black";
+    }
+  }
+});
+
+document.getElementById("playThreeName").addEventListener("click", function() {
+  if (userr == turnUser) {
+    if (document.getElementById("playThreeName").style.background == "grey") {
+      if (document.getElementById("redChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "red", number, userr, document.getElementById("playThreeUserName").innerHTML]
+      	});
+        document.getElementById("redChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountThree").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("redChipCountOne").style.color = "white";
+      } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "blue", number, userr, document.getElementById("playThreeUserName").innerHTML]
+      	});
+        document.getElementById("blueChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountThree").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("blueChipCountOne").style.color = "white";
+      } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "green", number, userr, document.getElementById("playThreeUserName").innerHTML]
+      	});
+        document.getElementById("greenChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountThree").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("greenChipCountOne").style.color = "white";
+      } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "yellow", number, userr, document.getElementById("playThreeUserName").innerHTML]
+      	});
+        document.getElementById("yellowChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountThree").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("yellowChipCountOne").style.color = "white";
+      }
+    } else if (document.getElementById("playThreeName").style.background == "white") {
+      pubnub.publish({
+    		channel : "game",
+    		message : ["newTurn", document.getElementById("playThreeUserName")]
+    	});
+      inStack = [false, false, false, false, ""];
+      turnUser = document.getElementById("playThreeUserName").innerHTML;
+      document.getElementById("turnPlateOne").style.display = "none";
+      document.getElementById("turnPlateThree").style.display = "block";
+      segment = "waiting";
+      document.getElementById("playOneName").style.background = "black";
+      document.getElementById("playTwoName").style.background = "black";
+      document.getElementById("playThreeName").style.background = "black";
+      document.getElementById("playFourName").style.background = "black";
+    }
+  }
+});
+
+document.getElementById("playFourName").addEventListener("click", function() {
+  if (userr == turnUser) {
+    if (document.getElementById("playFourName").style.background == "grey") {
+      if (document.getElementById("redChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "red", number, userr, document.getElementById("playFourUserName").innerHTML]
+      	});
+        document.getElementById("redChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountFour").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("redChipCountOne").style.color = "white";
+      } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "blue", number, userr, document.getElementById("playFourUserName").innerHTML]
+      	});
+        document.getElementById("blueChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountFour").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("blueChipCountOne").style.color = "white";
+      } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "green", number, userr, document.getElementById("playFourUserName").innerHTML]
+      	});
+        document.getElementById("greenChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountFour").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("greenChipCountOne").style.color = "white";
+      } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
+        pubnub.publish({
+      		channel : "game",
+      		message : ["transferChip", "yellow", number, userr, document.getElementById("playFourUserName").innerHTML]
+      	});
+        document.getElementById("yellowChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountFour").innerHTML)+temp);
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
+        document.getElementById("yellowChipCountOne").style.color = "white";
+      }
+    } else if (document.getElementById("playFourName").style.background == "white") {
+      pubnub.publish({
+    		channel : "game",
+    		message : ["newTurn", document.getElementById("playFourUserName")]
+    	});
+      inStack = [false, false, false, false, ""];
+      turnUser = document.getElementById("playFourUserName").innerHTML;
+      document.getElementById("turnPlateOne").style.display = "none";
+      document.getElementById("turnPlateFour").style.display = "block";
+      segment = "waiting";
+      document.getElementById("playOneName").style.background = "black";
+      document.getElementById("playTwoName").style.background = "black";
+      document.getElementById("playThreeName").style.background = "black";
+      document.getElementById("playFourName").style.background = "black";
+    }
+  }
+});
+
+document.getElementById("discard").addEventListener("click", function() {
+  if (JSON.parse(document.getElementById("redChipCountOne").innerHTML)>0) {
+    document.getElementById("redChipCountOne").style.color = "purple";
+  }
+  if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
+    document.getElementById("blueChipCountOne").style.color = "purple";
+  }
+  if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
+    document.getElementById("greenChipCountOne").style.color = "purple";
+  }
+  if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
+    document.getElementById("yellowChipCountOne").style.color = "purple";
+  }
+  if (document.getElementById("playOneName").style.color == "red") {
+    document.getElementById("redChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "blue") {
+    document.getElementById("blueChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "green") {
+    document.getElementById("greenChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "yellow") {
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  }
+});
+
+document.getElementById("trade").addEventListener("click", function() {
+  if (JSON.parse(document.getElementById("redChipCountOne").innerHTML)>0) {
+    document.getElementById("redChipCountOne").style.color = "yellow";
+  }
+  if (JSON.parse(document.getElementById("blueChipCountOne").innerHTML)>0) {
+    document.getElementById("blueChipCountOne").style.color = "yellow";
+  }
+  if (JSON.parse(document.getElementById("greenChipCountOne").innerHTML)>0) {
+    document.getElementById("greenChipCountOne").style.color = "yellow";
+  }
+  if (JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)>0) {
+    document.getElementById("yellowChipCountOne").style.color = "yellow";
+  }
+  if (document.getElementById("playOneName").style.color == "red") {
+    document.getElementById("redChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "blue") {
+    document.getElementById("blueChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "green") {
+    document.getElementById("greenChipCountOne").style.color = "white";
+  } else if (document.getElementById("playOneName").style.color == "yellow") {
+    document.getElementById("yellowChipCountOne").style.color = "white";
+  }
+});
+
+document.getElementById("done").addEventListener("click", function() {
+  segment = "turnChoose";
+  if (inStack[0] == false) {
+    if (document.getElementById("playOneName").style.color == "red") {
+      document.getElementById("playOneName").style.background = "white";
+    } else if (document.getElementById("playTwoName").style.color == "red") {
+      document.getElementById("playTwoName").style.background = "white";
+    } else if (document.getElementById("playThreeName").style.color == "red") {
+      document.getElementById("playThreeName").style.background = "white";
+    } else if (document.getElementById("playFourName").style.color == "red") {
+      document.getElementById("playFourName").style.background = "white";
+    }
+  }
+  if (inStack[1] == false) {
+    if (document.getElementById("playOneName").style.color == "blue") {
+      document.getElementById("playOneName").style.background = "white";
+    } else if (document.getElementById("playTwoName").style.color == "blue") {
+      document.getElementById("playTwoName").style.background = "white";
+    } else if (document.getElementById("playThreeName").style.color == "blue") {
+      document.getElementById("playThreeName").style.background = "white";
+    } else if (document.getElementById("playFourName").style.color == "blue") {
+      document.getElementById("playFourName").style.background = "white";
+    }
+  }
+  if (inStack[2] == false) {
+    if (document.getElementById("playOneName").style.color == "green") {
+      document.getElementById("playOneName").style.background = "white";
+    } else if (document.getElementById("playTwoName").style.color == "green") {
+      document.getElementById("playTwoName").style.background = "white";
+    } else if (document.getElementById("playThreeName").style.color == "green") {
+      document.getElementById("playThreeName").style.background = "white";
+    } else if (document.getElementById("playFourName").style.color == "green") {
+      document.getElementById("playFourName").style.background = "white";
+    }
+  }
+  if (inStack[3] == false) {
+    if (document.getElementById("playOneName").style.color == "yellow") {
+      document.getElementById("playOneName").style.background = "white";
+    } else if (document.getElementById("playTwoName").style.color == "yellow") {
+      document.getElementById("playTwoName").style.background = "white";
+    } else if (document.getElementById("playThreeName").style.color == "yellow") {
+      document.getElementById("playThreeName").style.background = "white";
+    } else if (document.getElementById("playFourName").style.color == "yellow") {
+      document.getElementById("playFourName").style.background = "white";
+    }
+  }
+  if (inStack[0] == true && inStack[1] == true && inStack[2] == true && inStack[3] == true) {
+    if (document.getElementById("playOneName").style.color == inStack[4]) {
+      document.getElementById("playOneName").style.background = "white";
+    } else if (document.getElementById("playTwoName").style.color == inStack[4]) {
+      document.getElementById("playTwoName").style.background = "white";
+    } else if (document.getElementById("playThreeName").style.color == inStack[4]) {
+      document.getElementById("playThreeName").style.background = "white";
+    } else if (document.getElementById("playFourName").style.color == inStack[4]) {
+      document.getElementById("playFourName").style.background = "white";
+    }
+  }
+  document.getElementById("discard").style.display = "none";
+  document.getElementById("trade").style.display = "none";
+  document.getElementById("done").style.display = "none";
+  document.getElementById("redChipCountOne").style.color = "white";
+  document.getElementById("blueChipCountOne").style.color = "white";
+  document.getElementById("greenChipCountOne").style.color = "white";
+  document.getElementById("yellowChipCountOne").style.color = "white";
+});
+
 document.getElementById("chipOne").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipOne").src).includes("redChip.jpg") || (document.getElementById("chipOne").src).includes("blueChip.jpg") || (document.getElementById("chipOne").src).includes("greenChip.jpg") || (document.getElementById("chipOne").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipOne").src).includes("redChip.jpg")) {
         place = 1;
@@ -382,7 +1216,7 @@ document.getElementById("chipOne").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwo").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwo").src).includes("redChip.jpg") || (document.getElementById("chipTwo").src).includes("blueChip.jpg") || (document.getElementById("chipTwo").src).includes("greenChip.jpg") || (document.getElementById("chipTwo").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwo").src).includes("redChip.jpg")) {
         place = 2;
@@ -405,7 +1239,7 @@ document.getElementById("chipTwo").addEventListener("click", function() {
 });
 
 document.getElementById("chipThree").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipThree").src).includes("redChip.jpg") || (document.getElementById("chipThree").src).includes("blueChip.jpg") || (document.getElementById("chipThree").src).includes("greenChip.jpg") || (document.getElementById("chipThree").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipThree").src).includes("redChip.jpg")) {
         place = 3;
@@ -428,7 +1262,7 @@ document.getElementById("chipThree").addEventListener("click", function() {
 });
 
 document.getElementById("chipFour").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipFour").src).includes("redChip.jpg") || (document.getElementById("chipFour").src).includes("blueChip.jpg") || (document.getElementById("chipFour").src).includes("greenChip.jpg") || (document.getElementById("chipFour").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipFour").src).includes("redChip.jpg")) {
         place = 4;
@@ -451,7 +1285,7 @@ document.getElementById("chipFour").addEventListener("click", function() {
 });
 
 document.getElementById("chipFive").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipFive").src).includes("redChip.jpg") || (document.getElementById("chipFive").src).includes("blueChip.jpg") || (document.getElementById("chipFive").src).includes("greenChip.jpg") || (document.getElementById("chipFive").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipFive").src).includes("redChip.jpg")) {
         place = 5;
@@ -474,7 +1308,7 @@ document.getElementById("chipFive").addEventListener("click", function() {
 });
 
 document.getElementById("chipSix").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipSix").src).includes("redChip.jpg") || (document.getElementById("chipSix").src).includes("blueChip.jpg") || (document.getElementById("chipSix").src).includes("greenChip.jpg") || (document.getElementById("chipSix").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipSix").src).includes("redChip.jpg")) {
         place = 6;
@@ -497,7 +1331,7 @@ document.getElementById("chipSix").addEventListener("click", function() {
 });
 
 document.getElementById("chipSeven").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipSeven").src).includes("redChip.jpg") || (document.getElementById("chipSeven").src).includes("blueChip.jpg") || (document.getElementById("chipSeven").src).includes("greenChip.jpg") || (document.getElementById("chipSeven").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipSeven").src).includes("redChip.jpg")) {
         place = 7;
@@ -520,7 +1354,7 @@ document.getElementById("chipSeven").addEventListener("click", function() {
 });
 
 document.getElementById("chipEight").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipEight").src).includes("redChip.jpg") || (document.getElementById("chipEight").src).includes("blueChip.jpg") || (document.getElementById("chipEight").src).includes("greenChip.jpg") || (document.getElementById("chipEight").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipEight").src).includes("redChip.jpg")) {
         place = 8;
@@ -543,7 +1377,7 @@ document.getElementById("chipEight").addEventListener("click", function() {
 });
 
 document.getElementById("chipNine").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipNine").src).includes("redChip.jpg") || (document.getElementById("chipNine").src).includes("blueChip.jpg") || (document.getElementById("chipNine").src).includes("greenChip.jpg") || (document.getElementById("chipNine").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipNine").src).includes("redChip.jpg")) {
         place = 9;
@@ -566,7 +1400,7 @@ document.getElementById("chipNine").addEventListener("click", function() {
 });
 
 document.getElementById("chipTen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTen").src).includes("redChip.jpg") || (document.getElementById("chipTen").src).includes("blueChip.jpg") || (document.getElementById("chipTen").src).includes("greenChip.jpg") || (document.getElementById("chipTen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTen").src).includes("redChip.jpg")) {
         place = 10;
@@ -589,7 +1423,7 @@ document.getElementById("chipTen").addEventListener("click", function() {
 });
 
 document.getElementById("chipEleven").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipEleven").src).includes("redChip.jpg") || (document.getElementById("chipEleven").src).includes("blueChip.jpg") || (document.getElementById("chipEleven").src).includes("greenChip.jpg") || (document.getElementById("chipEleven").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipEleven").src).includes("redChip.jpg")) {
         place = 11;
@@ -612,7 +1446,7 @@ document.getElementById("chipEleven").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwelve").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwelve").src).includes("redChip.jpg") || (document.getElementById("chipTwelve").src).includes("blueChip.jpg") || (document.getElementById("chipTwelve").src).includes("greenChip.jpg") || (document.getElementById("chipTwelve").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwelve").src).includes("redChip.jpg")) {
         place = 12;
@@ -635,7 +1469,7 @@ document.getElementById("chipTwelve").addEventListener("click", function() {
 });
 
 document.getElementById("chipThirteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipThirteen").src).includes("redChip.jpg") || (document.getElementById("chipThirteen").src).includes("blueChip.jpg") || (document.getElementById("chipThirteen").src).includes("greenChip.jpg") || (document.getElementById("chipThirteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipThirteen").src).includes("redChip.jpg")) {
         place = 13;
@@ -658,7 +1492,7 @@ document.getElementById("chipThirteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipFourteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipFourteen").src).includes("redChip.jpg") || (document.getElementById("chipFourteen").src).includes("blueChip.jpg") || (document.getElementById("chipFourteen").src).includes("greenChip.jpg") || (document.getElementById("chipFourteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipFourteen").src).includes("redChip.jpg")) {
         place = 14;
@@ -681,7 +1515,7 @@ document.getElementById("chipFourteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipFifteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipFifteen").src).includes("redChip.jpg") || (document.getElementById("chichipFifteenpOne").src).includes("blueChip.jpg") || (document.getElementById("chipFifteen").src).includes("greenChip.jpg") || (document.getElementById("chipFifteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipFifteen").src).includes("redChip.jpg")) {
         place = 15;
@@ -704,7 +1538,7 @@ document.getElementById("chipFifteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipSixteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipSixteen").src).includes("redChip.jpg") || (document.getElementById("chipSixteen").src).includes("blueChip.jpg") || (document.getElementById("chipSixteen").src).includes("greenChip.jpg") || (document.getElementById("chipSixteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipSixteen").src).includes("redChip.jpg")) {
         place = 16;
@@ -727,7 +1561,7 @@ document.getElementById("chipSixteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipSeventeen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipSeventeen").src).includes("redChip.jpg") || (document.getElementById("chipSeventeen").src).includes("blueChip.jpg") || (document.getElementById("chipSeventeen").src).includes("greenChip.jpg") || (document.getElementById("chipSeventeen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipSeventeen").src).includes("redChip.jpg")) {
         place = 17;
@@ -750,7 +1584,7 @@ document.getElementById("chipSeventeen").addEventListener("click", function() {
 });
 
 document.getElementById("chipEighteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipEighteen").src).includes("redChip.jpg") || (document.getElementById("chipEighteen").src).includes("blueChip.jpg") || (document.getElementById("chipEighteen").src).includes("greenChip.jpg") || (document.getElementById("chipEighteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipEighteen").src).includes("redChip.jpg")) {
         place = 18;
@@ -773,7 +1607,7 @@ document.getElementById("chipEighteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipNineteen").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipNineteen").src).includes("redChip.jpg") || (document.getElementById("chipNineteen").src).includes("blueChip.jpg") || (document.getElementById("chipNineteen").src).includes("greenChip.jpg") || (document.getElementById("chipNineteen").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipNineteen").src).includes("redChip.jpg")) {
         place = 19;
@@ -796,7 +1630,7 @@ document.getElementById("chipNineteen").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwenty").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwenty").src).includes("redChip.jpg") || (document.getElementById("chipTwenty").src).includes("blueChip.jpg") || (document.getElementById("chipTwenty").src).includes("greenChip.jpg") || (document.getElementById("chipTwenty").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwenty").src).includes("redChip.jpg")) {
         place = 20;
@@ -819,7 +1653,7 @@ document.getElementById("chipTwenty").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentyone").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentyone").src).includes("redChip.jpg") || (document.getElementById("chipTwentyone").src).includes("blueChip.jpg") || (document.getElementById("chipTwentyone").src).includes("greenChip.jpg") || (document.getElementById("chipTwentyone").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentyone").src).includes("redChip.jpg")) {
         place = 21;
@@ -842,7 +1676,7 @@ document.getElementById("chipTwentyone").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentytwo").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentytwo").src).includes("redChip.jpg") || (document.getElementById("chipTwentytwo").src).includes("blueChip.jpg") || (document.getElementById("chipTwentytwo").src).includes("greenChip.jpg") || (document.getElementById("chipTwentytwo").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentytwo").src).includes("redChip.jpg")) {
         place = 22;
@@ -865,7 +1699,7 @@ document.getElementById("chipTwentytwo").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentythree").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentythree").src).includes("redChip.jpg") || (document.getElementById("chipTwentythree").src).includes("blueChip.jpg") || (document.getElementById("chipTwentythree").src).includes("greenChip.jpg") || (document.getElementById("chipTwentythree").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentythree").src).includes("redChip.jpg")) {
         place = 23;
@@ -888,7 +1722,7 @@ document.getElementById("chipTwentythree").addEventListener("click", function() 
 });
 
 document.getElementById("chipTwentyfour").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentyfour").src).includes("redChip.jpg") || (document.getElementById("chipTwentyfour").src).includes("blueChip.jpg") || (document.getElementById("chipTwentyfour").src).includes("greenChip.jpg") || (document.getElementById("chipTwentyfour").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentyfour").src).includes("redChip.jpg")) {
         place = 24;
@@ -911,7 +1745,7 @@ document.getElementById("chipTwentyfour").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentyfive").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentyfive").src).includes("redChip.jpg") || (document.getElementById("chipTwentyfive").src).includes("blueChip.jpg") || (document.getElementById("chipTwentyfive").src).includes("greenChip.jpg") || (document.getElementById("chipTwentyfive").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentyfive").src).includes("redChip.jpg")) {
         place = 25;
@@ -934,7 +1768,7 @@ document.getElementById("chipTwentyfive").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentysix").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentysix").src).includes("redChip.jpg") || (document.getElementById("chipTwentysix").src).includes("blueChip.jpg") || (document.getElementById("chipTwentysix").src).includes("greenChip.jpg") || (document.getElementById("chipTwentysix").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentysix").src).includes("redChip.jpg")) {
         place = 26;
@@ -957,7 +1791,7 @@ document.getElementById("chipTwentysix").addEventListener("click", function() {
 });
 
 document.getElementById("chipTwentyseven").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentyseven").src).includes("redChip.jpg") || (document.getElementById("chipTwentyseven").src).includes("blueChip.jpg") || (document.getElementById("chipTwentyseven").src).includes("greenChip.jpg") || (document.getElementById("chipTwentyseven").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentyseven").src).includes("redChip.jpg")) {
         place = 27;
@@ -980,7 +1814,7 @@ document.getElementById("chipTwentyseven").addEventListener("click", function() 
 });
 
 document.getElementById("chipTwentyeight").addEventListener("click", function() {
-  if (turnUser == userr) {
+  if (turnUser == userr && segment == "placement") {
     if ((document.getElementById("chipTwentyeight").src).includes("redChip.jpg") || (document.getElementById("chipTwentyeight").src).includes("blueChip.jpg") || (document.getElementById("chipTwentyeight").src).includes("greenChip.jpg") || (document.getElementById("chipTwentyeight").src).includes("yellowChip.jpg")) {
       if ((document.getElementById("chipTwentyeight").src).includes("redChip.jpg")) {
         place = 28;
