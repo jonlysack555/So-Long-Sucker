@@ -825,9 +825,11 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
         segment = "capture";
         setTimeout(capture, 1500, place);
       }
-      if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
-        segment = "capture";
-        setTimeout(capture, 1500, place-1);
+      if (place != 1) {
+        if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+          segment = "capture";
+          setTimeout(capture, 1500, place-1);
+        }
       }
     } else {
       chipSlots[place].src = "redChip.jpg";
@@ -932,9 +934,11 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
         segment = "capture";
         setTimeout(capture, 1500, place);
       }
-      if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
-        segment = "capture";
-        setTimeout(capture, 1500, place-1);
+      if (place != 1) {
+        if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+          segment = "capture";
+          setTimeout(capture, 1500, place-1);
+        }
       }
     } else {
       chipSlots[place].src = "blueChip.jpg";
@@ -1148,9 +1152,11 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
         segment = "capture";
         setTimeout(capture, 1500, place);
       }
-      if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
-        segment = "capture";
-        setTimeout(capture, 1500, place-1);
+      if (place != 1) {
+        if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+          segment = "capture";
+          setTimeout(capture, 1500, place-1);
+        }
       }
     } else {
       chipSlots[place].src = "yellowChip.jpg";
