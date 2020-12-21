@@ -564,8 +564,13 @@ function stackChip() {
     }
   }
   stackHeight = 1;
-  while (chipSlots[place - stackHeight].src != "") {
-    stackHeight += 1;
+  var useThis = false;
+  while (chipSlots[place-stackHeight].src != "" && useThis == false) {
+    if (place-stackHeight == 0) {
+      useThis = true;
+    } else {
+      stackHeight += 1;
+    }
   }
   stackHeight -= 1;
   if (JSON.parse(document.getElementById("redChipCountOne").innerHTML)>0) {
