@@ -317,22 +317,22 @@ pubnub.addListener({
             document.getElementById("yellowChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountFour").innerHTML)-1);
           }
         }
-        document.getElementById("redChipCountOne").style.color = white;
-        document.getElementById("blueChipCountOne").style.color = white;
-        document.getElementById("greenChipCountOne").style.color = white;
-        document.getElementById("yellowChipCountOne").style.color = white;
-        document.getElementById("redChipCountTwo").style.color = white;
-        document.getElementById("blueChipCountTwo").style.color = white;
-        document.getElementById("greenChipCountTwo").style.color = white;
-        document.getElementById("yellowChipCountTwo").style.color = white;
-        document.getElementById("redChipCountThree").style.color = white;
-        document.getElementById("blueChipCountThree").style.color = white;
-        document.getElementById("greenChipCountThree").style.color = white;
-        document.getElementById("yellowChipCountThree").style.color = white;
-        document.getElementById("redChipCountFour").style.color = white;
-        document.getElementById("blueChipCountFour").style.color = white;
-        document.getElementById("greenChipCountFour").style.color = white;
-        document.getElementById("yellowChipCountFour").style.color = white;
+        document.getElementById("redChipCountOne").style.color = "white";
+        document.getElementById("blueChipCountOne").style.color = "white";
+        document.getElementById("greenChipCountOne").style.color = "white";
+        document.getElementById("yellowChipCountOne").style.color = "white";
+        document.getElementById("redChipCountTwo").style.color = "white";
+        document.getElementById("blueChipCountTwo").style.color = "white";
+        document.getElementById("greenChipCountTwo").style.color = "white";
+        document.getElementById("yellowChipCountTwo").style.color = "white";
+        document.getElementById("redChipCountThree").style.color = "white";
+        document.getElementById("blueChipCountThree").style.color = "white";
+        document.getElementById("greenChipCountThree").style.color = "white";
+        document.getElementById("yellowChipCountThree").style.color = "white";
+        document.getElementById("redChipCountFour").style.color = "white";
+        document.getElementById("blueChipCountFour").style.color = "white";
+        document.getElementById("greenChipCountFour").style.color = "white";
+        document.getElementById("yellowChipCountFour").style.color = "white";
       } else if (event.message[0] == "discardChip") {
         var tempChip = event.message[1];
         var tempNum = event.message[2];
