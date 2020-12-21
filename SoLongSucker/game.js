@@ -701,6 +701,7 @@ function capture(place) {
       player = 3;
     }
   }
+  var orThis = false;
   var c = 0;
   /*var temper = "";
   if (document.getElementById("playOneName").style.color == "red") {
@@ -712,7 +713,7 @@ function capture(place) {
   } else if (document.getElementById("playOneName").style.color == "yellow") {
     inStack[3] = true;
   }*/
-  while ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3) {
+  while ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3 && orThis == false) {
     /*if ((chipSlots[place+c].src).includes("redChip.jpg")) {
       if (inStack[1] == true && inStack[2] == true && inStack[3] == true && inStack[0] != true) {
         temper = "red";
@@ -737,7 +738,11 @@ function capture(place) {
     if (inStack[0] == true && inStack[1] == true && inStack[2] == true && inStack[3] == true) {
       inStack[4] = temper;
     }*/
-    c -= 1;
+    if (place+c-1 == 0) {
+      orThis = true;
+    } else {
+      c -= 1;
+    }
   }
   console.log(c);
   while (c < 1) {
@@ -1032,9 +1037,11 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
         segment = "capture";
         setTimeout(capture, 1500, place);
       }
-      if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
-        segment = "capture";
-        setTimeout(capture, 1500, place-1);
+      if (place != 1) {
+        if (chipSlots[place-1].src == chipSlots[place-2].src && chipSlots[place-1].style.left == chipSlots[place-2].style.left) {
+          segment = "capture";
+          setTimeout(capture, 1500, place-1);
+        }
       }
     } else {
       chipSlots[place].src = "greenChip.jpg";
