@@ -126,7 +126,7 @@ pubnub.subscribe({
 console.log(gameArray);
 
 if (userr == order[0]) {
-  setTimeout(send, 200);
+  setTimeout(send, 500);
 }
 
 function send() {
