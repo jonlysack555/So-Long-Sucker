@@ -112,10 +112,6 @@ if (userr == order[0]) {
   }
 }
 
-if (userr == turnUser) {
-  segment = "placement";
-}
-
 const pubnub = new PubNub({
   publishKey: "pub-c-c03147c7-bee2-4479-8823-b5669448d70a",
   subscribeKey: "sub-c-a30a8486-3f1b-11eb-a233-facb2062b65c",
@@ -129,11 +125,15 @@ pubnub.subscribe({
 
 console.log(gameArray);
 
-if (userr == turnUser) {
+if (userr == order[0]) {
   pubnub.publish({
     channel : "game",
-    message : ["startTurn", userr]
+    message : ["startTurn", turnUser]
   });
+}
+
+if (userr == turnUser) {
+  segment = "placement";
 }
 
 pubnub.addListener({
