@@ -750,6 +750,9 @@ function capture(place) {
       c -= 1;
     }
   }
+  if (orThis == true) {
+    c -= 1;
+  }
   console.log(c);
   while (c < 1) {
     if ((chipSlots[place+c].src).includes("redChip.jpg")) {
