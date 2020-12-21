@@ -165,7 +165,7 @@ pubnub.addListener({
         var tempPlace = event.message[2];
         var tempUser = event.message[3];
         var tempChip = event.message[1];
-        chipSpace[tempPlace-1].src = tempChip;
+        chipSlots[tempPlace-1].src = tempChip;
         if (document.getElementById("playTwoUserName").innerHTML == tempUser) {
           if (tempChip == "redChip.jpg") {
             document.getElementById("redChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountTwo").innerHTML)-1);
