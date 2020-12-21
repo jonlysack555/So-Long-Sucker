@@ -532,14 +532,16 @@ function stackChip() {
       } else if ((chipSlots[place-1].src).includes("yellowChip.jpg")) {
         inStack[3] = true;
       }
-      if ((chipSlots[place-2].src).includes("redChip.jpg")) {
-        inStack[0] = true;
-      } else if ((chipSlots[place-2].src).includes("blueChip.jpg")) {
-        inStack[1] = true;
-      } else if ((chipSlots[place-2].src).includes("greenChip.jpg")) {
-        inStack[2] = true;
-      } else if ((chipSlots[place-2].src).includes("yellowChip.jpg")) {
-        inStack[3] = true;
+      if ((JSON.parse((chipSlots[place-1].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place-2].style.left).slice(0, -1))) == 3) {
+        if ((chipSlots[place-2].src).includes("redChip.jpg")) {
+          inStack[0] = true;
+        } else if ((chipSlots[place-2].src).includes("blueChip.jpg")) {
+          inStack[1] = true;
+        } else if ((chipSlots[place-2].src).includes("greenChip.jpg")) {
+          inStack[2] = true;
+        } else if ((chipSlots[place-2].src).includes("yellowChip.jpg")) {
+          inStack[3] = true;
+        }
       }
     } else {
       if ((chipSlots[place-1].src).includes("redChip.jpg")) {
