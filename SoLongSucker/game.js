@@ -126,6 +126,10 @@ pubnub.subscribe({
 console.log(gameArray);
 
 if (userr == order[0]) {
+  setTimeout(send, 200);
+}
+
+function send() {
   pubnub.publish({
     channel : "game",
     message : ["startTurn", turnUser]
@@ -134,6 +138,8 @@ if (userr == order[0]) {
 
 if (userr == turnUser) {
   segment = "placement";
+} else {
+  segment = "waiting";
 }
 
 pubnub.addListener({
