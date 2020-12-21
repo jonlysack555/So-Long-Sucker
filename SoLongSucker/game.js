@@ -1254,7 +1254,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
     } else if (document.getElementById("playTwoName").style.background == "white") {
       pubnub.publish({
     		channel : "game",
-    		message : ["newTurn", document.getElementById("playTwoUserName")]
+    		message : ["newTurn", document.getElementById("playTwoUserName").innerHTML]
     	});
       inStack = [false, false, false, false, ""];
       turnUser = document.getElementById("playTwoUserName").innerHTML;
@@ -1316,7 +1316,7 @@ document.getElementById("playThreeName").addEventListener("click", function() {
     } else if (document.getElementById("playThreeName").style.background == "white") {
       pubnub.publish({
     		channel : "game",
-    		message : ["newTurn", document.getElementById("playThreeUserName")]
+    		message : ["newTurn", document.getElementById("playThreeUserName"),innerHTML]
     	});
       inStack = [false, false, false, false, ""];
       turnUser = document.getElementById("playThreeUserName").innerHTML;
@@ -1378,7 +1378,7 @@ document.getElementById("playFourName").addEventListener("click", function() {
     } else if (document.getElementById("playFourName").style.background == "white") {
       pubnub.publish({
     		channel : "game",
-    		message : ["newTurn", document.getElementById("playFourUserName")]
+    		message : ["newTurn", document.getElementById("playFourUserName").innerHTML]
     	});
       inStack = [false, false, false, false, ""];
       turnUser = document.getElementById("playFourUserName").innerHTML;
