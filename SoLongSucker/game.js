@@ -280,6 +280,9 @@ pubnub.addListener({
 
 
         chipSlots[tempPlace].src = tempChip;
+        if (chipSlots[tempPlace].src == chipSlots[tempPlace-1].src) {
+          capture(tempPlace);
+        }
       } else if (event.message[0] == "elimChip") {
         var tempChip = event.message[1];
         var tempUser = event.message[2];
@@ -428,7 +431,7 @@ pubnub.addListener({
         }
       } else if (event.message[0] == "newTurn") {
         if (event.message[1] == userr) {
-          turnUser = user;
+          turnUser = userr;
           segment = "placement";
           document.getElementById("turnPlateOne").style.display = "block";
           document.getElementById("turnPlateTwo").style.display = "none";
