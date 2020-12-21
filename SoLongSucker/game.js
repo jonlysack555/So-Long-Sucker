@@ -1232,7 +1232,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
       if (document.getElementById("redChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "redChip.jpg", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      		message : ["transferChip", "redChip.jpg", temp, userr, document.getElementById("playTwoUserName").innerHTML]
       	});
         document.getElementById("redChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountTwo").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1242,7 +1242,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
       } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "blueChip.jpg", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      		message : ["transferChip", "blueChip.jpg", temp, userr, document.getElementById("playTwoUserName").innerHTML]
       	});
         document.getElementById("blueChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountTwo").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1252,7 +1252,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
       } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "greenChip.jpg", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      		message : ["transferChip", "greenChip.jpg", temp, userr, document.getElementById("playTwoUserName").innerHTML]
       	});
         document.getElementById("greenChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountTwo").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1262,7 +1262,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
       } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "yellowChip.jpg", number, userr, document.getElementById("playTwoUserName").innerHTML]
+      		message : ["transferChip", "yellowChip.jpg", temp, userr, document.getElementById("playTwoUserName").innerHTML]
       	});
         document.getElementById("yellowChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountTwo").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1356,7 +1356,7 @@ document.getElementById("playFourName").addEventListener("click", function() {
       if (document.getElementById("redChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "redChip.jpg", number, userr, document.getElementById("playFourUserName").innerHTML]
+      		message : ["transferChip", "redChip.jpg", temp, userr, document.getElementById("playFourUserName").innerHTML]
       	});
         document.getElementById("redChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountFour").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1366,7 +1366,7 @@ document.getElementById("playFourName").addEventListener("click", function() {
       } else if (document.getElementById("blueChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "blueChip.jpg", number, userr, document.getElementById("playFourUserName").innerHTML]
+      		message : ["transferChip", "blueChip.jpg", temp, userr, document.getElementById("playFourUserName").innerHTML]
       	});
         document.getElementById("blueChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountFour").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1376,7 +1376,7 @@ document.getElementById("playFourName").addEventListener("click", function() {
       } else if (document.getElementById("greenChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "greenChip.jpg", number, userr, document.getElementById("playFourUserName").innerHTML]
+      		message : ["transferChip", "greenChip.jpg", temp, userr, document.getElementById("playFourUserName").innerHTML]
       	});
         document.getElementById("greenChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountFour").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
@@ -1386,7 +1386,7 @@ document.getElementById("playFourName").addEventListener("click", function() {
       } else if (document.getElementById("yellowChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : "game",
-      		message : ["transferChip", "yellowChip.jpg", number, userr, document.getElementById("playFourUserName").innerHTML]
+      		message : ["transferChip", "yellowChip.jpg", temp, userr, document.getElementById("playFourUserName").innerHTML]
       	});
         document.getElementById("yellowChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountFour").innerHTML)+temp);
         document.getElementById("playTwoName").style.background = "black";
