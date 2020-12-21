@@ -129,10 +129,12 @@ pubnub.subscribe({
 
 console.log(gameArray);
 
-pubnub.publish({
-  channel : "game",
-  message : ["startTurn", turnUser]
-});
+if (userr == turnUser) {
+  pubnub.publish({
+    channel : "game",
+    message : ["startTurn", userr]
+  });
+}
 
 pubnub.addListener({
   message: function(event) {
