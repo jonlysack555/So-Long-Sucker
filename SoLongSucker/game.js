@@ -492,9 +492,13 @@ function stackChip() {
   } else if (document.getElementById("playOneName").style.color == "yellow") {
     inStack[3] = true;
   }
+  var thisOne = false;
   if (place > 2) {
-    while ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3 || c == -1) {
+    while (((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) == 3 || c == -1) && thisOne == false) {
       console.log(chipSlots[place+c].src);
+      if ((JSON.parse((chipSlots[place+c].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c-1].style.left).slice(0, -1))) != 3) {
+        thisOne = true;
+      }
       if ((chipSlots[place+c].src).includes("redChip.jpg")) {
         if (inStack[1] == true && inStack[2] == true && inStack[3] == true && inStack[0] != true) {
           temper = "red";
