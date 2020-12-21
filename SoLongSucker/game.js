@@ -404,7 +404,7 @@ pubnub.addListener({
             document.getElementById("yellowChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountFour").innerHTML)-tempNum);
           }
         }
-        if (document.getElementById("playOneUserName").innerHTML == tempUserGive) {
+        if (document.getElementById("playOneUserName").innerHTML == tempUserGet) {
           if (tempChip == "redChip.jpg") {
             document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML)+tempNum);
           } else if (tempChip == "blueChip.jpg") {
@@ -414,7 +414,7 @@ pubnub.addListener({
           } else if (tempChip == "yellowChip.jpg") {
             document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)+tempNum);
           }
-        } else if (document.getElementById("playTwoUserName").innerHTML == tempUserGive) {
+        } else if (document.getElementById("playTwoUserName").innerHTML == tempUserGet) {
           if (tempChip == "redChip.jpg") {
             document.getElementById("redChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountTwo").innerHTML)+tempNum);
           } else if (tempChip == "blueChip.jpg") {
@@ -424,7 +424,7 @@ pubnub.addListener({
           } else if (tempChip == "yellowChip.jpg") {
             document.getElementById("yellowChipCountTwo").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountTwo").innerHTML)+tempNum);
           }
-        } else if (document.getElementById("playThreeUserName").innerHTML == tempUserGive) {
+        } else if (document.getElementById("playThreeUserName").innerHTML == tempUserGet) {
           if (tempChip == "redChip.jpg") {
             document.getElementById("redChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountThree").innerHTML)+tempNum);
           } else if (tempChip == "blueChip.jpg") {
@@ -434,7 +434,7 @@ pubnub.addListener({
           } else if (tempChip == "yellowChip.jpg") {
             document.getElementById("yellowChipCountThree").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountThree").innerHTML)+tempNum);
           }
-        } else if (document.getElementById("playFourUserName").innerHTML == tempUserGive) {
+        } else if (document.getElementById("playFourUserName").innerHTML == tempUserGet) {
           if (tempChip == "redChip.jpg") {
             document.getElementById("redChipCountFour").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountFour").innerHTML)+tempNum);
           } else if (tempChip == "blueChip.jpg") {
