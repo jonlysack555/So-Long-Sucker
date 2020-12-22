@@ -272,30 +272,25 @@ pubnub.addListener({
           }
           chipSlots[tempPlace].style.left = JSON.stringify(JSON.parse((chipSlots[tempPlace-1].style.left).slice(0, -1))+3)+"%";
           chipSlots[tempPlace].style.top = chipSlots[tempPlace-1].style.top;
-          console.log("up");
         } else {
-          console.log("back");
           i = 0;
-          while (chipSlots[tempPlace-i].src != "") {
+          while (chipSlots[tempPlace-i+1].src != "") {
             i += 1;
           }
           while (i > 0) {
             console.log(i);
-            chipSlots[tempPlace-i].src = chipSlots[tempPlace-i+1].src;
-            if ((JSON.parse((chipSlots[tempPlace].style.left).slice(0, -1)))-(JSON.parse((chipSlots[tempPlace-1].style.left).slice(0, -1))) <= 14) {
-              console.log("one");
-              chipSlots[tempPlace-i].style.left = JSON.stringify(JSON.parse((chipSlots[tempPlace-i+1].style.left).slice(0, -1))-14)+"%";
+            chipSlots[tempPlace-i+1].src = chipSlots[tempPlace-i+2].src;
+            if ((JSON.parse((chipSlots[tempPlace+1].style.left).slice(0, -1)))-(JSON.parse((chipSlots[tempPlace].style.left).slice(0, -1))) <= 14) {
+              chipSlots[tempPlace-i+1].style.left = JSON.stringify(JSON.parse((chipSlots[tempPlace-i+2].style.left).slice(0, -1))-14)+"%";
             } else {
-              console.log("two");
-              chipSlots[tempPlace-i].style.left = chipSlots[tempPlace-i+1].style.left;
+              chipSlots[tempPlace-i+1].style.left = chipSlots[tempPlace-i+2].style.left;
             }
-            chipSlots[tempPlace-i].style.top = chipSlots[tempPlace-i+1].style.top;
+            chipSlots[tempPlace-i+1].style.top = chipSlots[tempPlace-i+2].style.top;
             i -= 1;
           }
-          chipSlots[tempPlace-1].style.left = JSON.stringify(JSON.parse((chipSlots[tempPlace-2].style.left).slice(0, -1))+3)+"%";
-          chipSlots[tempPlace-1].style.top = chipSlots[tempPlace-2].style.top;
+          chipSlots[tempPlace].style.left = JSON.stringify(JSON.parse((chipSlots[tempPlace-1].style.left).slice(0, -1))+3)+"%";
+          chipSlots[tempPlace].style.top = chipSlots[tempPlace-1].style.top;
         }
-
 
         chipSlots[tempPlace].src = tempChip;
         if (chipSlots[tempPlace].src == chipSlots[tempPlace-1].src) {
@@ -872,7 +867,7 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("redChipCountOne").style.color == "blue") {
-    setTimeout(doRed, 50);
+    setTimeout(doRed, 100);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -988,7 +983,7 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("blueChipCountOne").style.color == "blue") {
-    setTimeout(doBlue, 50);
+    setTimeout(doBlue, 100);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -1104,7 +1099,7 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("greenChipCountOne").style.color == "blue") {
-    setTimeout(doGreen, 50);
+    setTimeout(doGreen, 100);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -1220,7 +1215,7 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("yellowChipCountOne").style.color == "blue") {
-    setTimeout(doYellow, 50);
+    setTimeout(doYellow, 100);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
