@@ -662,9 +662,7 @@ function push() {
     }
     chipSlots[place].style.left = JSON.stringify(JSON.parse((chipSlots[place-1].style.left).slice(0, -1))+3)+"%";
     chipSlots[place].style.top = chipSlots[place-1].style.top;
-    console.log("up");
   } else {
-    console.log("back");
     i = 0;
     while (chipSlots[place-i].src != "") {
       i += 1;
@@ -673,10 +671,8 @@ function push() {
       console.log(i);
       chipSlots[place-i].src = chipSlots[place-i+1].src;
       if ((JSON.parse((chipSlots[place].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place-1].style.left).slice(0, -1))) <= 14) {
-        console.log("one");
         chipSlots[place-i].style.left = JSON.stringify(JSON.parse((chipSlots[place-i+1].style.left).slice(0, -1))-14)+"%";
       } else {
-        console.log("two");
         chipSlots[place-i].style.left = chipSlots[place-i+1].style.left;
       }
       chipSlots[place-i].style.top = chipSlots[place-i+1].style.top;
@@ -684,6 +680,7 @@ function push() {
     }
     chipSlots[place-1].style.left = JSON.stringify(JSON.parse((chipSlots[place-2].style.left).slice(0, -1))+3)+"%";
     chipSlots[place-1].style.top = chipSlots[place-2].style.top;
+    place = place - 1;
   }
 }
 
