@@ -805,6 +805,8 @@ function capture(place) {
 
 document.getElementById("redChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "redChip.jpg";
+  document.getElementById("finall").src = "redChip.jpg";
+  document.getElementById("finalll").src = "redChip.jpg";
   if (document.getElementById("redChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -916,6 +918,8 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
 
 document.getElementById("blueChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "blueChip.jpg";
+  document.getElementById("finall").src = "blueChip.jpg";
+  document.getElementById("finalll").src = "blueChip.jpg";
   if (document.getElementById("blueChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -1027,6 +1031,8 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
 
 document.getElementById("greenChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "greenChip.jpg";
+  document.getElementById("finall").src = "greenChip.jpg";
+  document.getElementById("finalll").src = "greenChip.jpg";
   if (document.getElementById("greenChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -1138,6 +1144,8 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
 
 document.getElementById("yellowChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "yellowChip.jpg";
+  document.getElementById("finall").src = "yellowChip.jpg";
+  document.getElementById("finalll").src = "yellowChip.jpg";
   if (document.getElementById("yellowChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
