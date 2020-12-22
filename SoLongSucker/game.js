@@ -868,10 +868,12 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
   		channel : "game",
   		message : ["elimChip", "redChip.jpg", userr]
   	});
-    segment = "disTrade";
-    document.getElementById("discard").style.display = "block";
-    document.getElementById("trade").style.display = "block";
-    document.getElementById("done").style.display = "block";
+    if (turnUser == userr) {
+      segment = "disTrade";
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
     document.getElementById("redChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("redChipCountOne").innerHTML)-1);
     document.getElementById("redChipCountOne").style.color = "white";
     document.getElementById("blueChipCountOne").style.color = "white";
