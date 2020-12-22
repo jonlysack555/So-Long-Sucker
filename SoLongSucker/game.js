@@ -333,6 +333,12 @@ pubnub.addListener({
         document.getElementById("blueChipCountFour").style.color = "white";
         document.getElementById("greenChipCountFour").style.color = "white";
         document.getElementById("yellowChipCountFour").style.color = "white";
+        if (turnUser == userr) {
+          segment = "disTrade";
+          document.getElementById("discard").style.display = "block";
+          document.getElementById("trade").style.display = "block";
+          document.getElementById("done").style.display = "block";
+        }
       } else if (event.message[0] == "discardChip") {
         var tempChip = event.message[1];
         var tempNum = event.message[2];
