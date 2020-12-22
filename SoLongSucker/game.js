@@ -828,21 +828,21 @@ function doRed() {
 function doBlue() {
   pubnub.publish({
     channel : "game",
-    message : ["stackChip", "redChip.jpg", place, userr]
+    message : ["stackChip", "blueChip.jpg", place, userr]
   });
 }
 
 function doGreen() {
   pubnub.publish({
     channel : "game",
-    message : ["stackChip", "redChip.jpg", place, userr]
+    message : ["stackChip", "greenChip.jpg", place, userr]
   });
 }
 
 function doYellow() {
   pubnub.publish({
     channel : "game",
-    message : ["stackChip", "redChip.jpg", place, userr]
+    message : ["stackChip", "yellowChip.jpg", place, userr]
   });
 }
 
