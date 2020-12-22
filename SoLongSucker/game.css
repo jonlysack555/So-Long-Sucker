@@ -463,6 +463,37 @@
   left: -35%;
 }
 
+.deathPlate {
+  color: white;
+  position: absolute;
+  font-size: 50px;
+  font-weight: bold;
+  display: none;
+}
+
+#deathPlateOne {
+  right: 5%;
+  top: -25%;
+}
+
+#deathPlateTwo {
+  transform: rotate(90deg);
+  bottom: 15%;
+  right: -45%;
+}
+
+#deathPlateThree {
+  transform: rotate(180deg);
+  left: 5%;
+  bottom: -25%;
+}
+
+#deathPlateFour {
+  transform: rotate(270deg);
+  top: 15%;
+  left: -45%;
+}
+
 #final {
   display: none;
 }
