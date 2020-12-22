@@ -467,6 +467,10 @@
   display: none;
 }
 
+#finall {
+  display: none;
+}
+
 .disTrade {
   display: none;
   width: 10%;
