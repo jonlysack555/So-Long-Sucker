@@ -146,7 +146,25 @@ pubnub.addListener({
   message: function(event) {
     console.log(event.message);
     if (turnUser != userr || (event.message[0] == "elimChip" && event.message[2] != userr)) {
-      if (event.message[0] == "startTurn") {
+      if (event.message[0] == "clickChip") {
+        if (event.message[1] == "redChip.jpg") {
+          document.getElementById("final").src = "redChip.jpg";
+          document.getElementById("finall").src = "redChip.jpg";
+          document.getElementById("finalll").src = "redChip.jpg";
+        } else if (event.message[1] == "blueChip.jpg") {
+          document.getElementById("final").src = "blueChip.jpg";
+          document.getElementById("finall").src = "blueChip.jpg";
+          document.getElementById("finalll").src = "blueChip.jpg";
+        } else if (event.message[1] == "greenChip.jpg") {
+          document.getElementById("final").src = "greenChip.jpg";
+          document.getElementById("finall").src = "greenChip.jpg";
+          document.getElementById("finalll").src = "greenChip.jpg";
+        } else if (event.message[1] == "yellowChip.jpg") {
+          document.getElementById("final").src = "yellowChip.jpg";
+          document.getElementById("finall").src = "yellowChip.jpg";
+          document.getElementById("finalll").src = "yellowChip.jpg";
+        }
+      } else if (event.message[0] == "startTurn") {
         turnUser = event.message[1];
         if (turnUser == userr) {
           segment = "placement";
@@ -807,6 +825,12 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
   document.getElementById("final").src = "redChip.jpg";
   document.getElementById("finall").src = "redChip.jpg";
   document.getElementById("finalll").src = "redChip.jpg";
+  if (turnUser == userr) {
+    pubnub.publish({
+      channel : "game",
+      message : ["clickChip", "redChip.jpg"]
+    });
+  }
   if (document.getElementById("redChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -920,6 +944,12 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
   document.getElementById("final").src = "blueChip.jpg";
   document.getElementById("finall").src = "blueChip.jpg";
   document.getElementById("finalll").src = "blueChip.jpg";
+  if (turnUser == userr) {
+    pubnub.publish({
+      channel : "game",
+      message : ["clickChip", "blueChip.jpg"]
+    });
+  }
   if (document.getElementById("blueChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -1033,6 +1063,12 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
   document.getElementById("final").src = "greenChip.jpg";
   document.getElementById("finall").src = "greenChip.jpg";
   document.getElementById("finalll").src = "greenChip.jpg";
+  if (turnUser == userr) {
+    pubnub.publish({
+      channel : "game",
+      message : ["clickChip", "greenChip.jpg"]
+    });
+  }
   if (document.getElementById("greenChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
@@ -1146,6 +1182,12 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
   document.getElementById("final").src = "yellowChip.jpg";
   document.getElementById("finall").src = "yellowChip.jpg";
   document.getElementById("finalll").src = "yellowChip.jpg";
+  if (turnUser == userr) {
+    pubnub.publish({
+      channel : "game",
+      message : ["clickChip", "yellowChip.jpg"]
+    });
+  }
   if (document.getElementById("yellowChipCountOne").style.color == "green") {
     pubnub.publish({
   		channel : "game",
