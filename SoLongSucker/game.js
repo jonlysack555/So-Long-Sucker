@@ -2197,7 +2197,7 @@ document.getElementById("chipTwentyeight").addEventListener("click", function() 
       } else if ((document.getElementById("chipTwentyeight").src).includes("blueChip.jpg")) {
         place = 28;
         stackChip();
-      } else if ((document.getElementById("chchipTwentyeightipOne").src).includes("greenChip.jpg")) {
+      } else if ((document.getElementById("chipTwentyeight").src).includes("greenChip.jpg")) {
         place = 28;
         stackChip();
       } else if ((document.getElementById("chipTwentyeight").src).includes("yellowChip.jpg")) {
