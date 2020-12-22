@@ -821,6 +821,34 @@ function capture(place) {
   }
 }
 
+function doRed() {
+  pubnub.publish({
+    channel : "game",
+    message : ["stackChip", "redChip.jpg", place, userr]
+  });
+}
+
+function doBlue() {
+  pubnub.publish({
+    channel : "game",
+    message : ["stackChip", "redChip.jpg", place, userr]
+  });
+}
+
+function doGreen() {
+  pubnub.publish({
+    channel : "game",
+    message : ["stackChip", "redChip.jpg", place, userr]
+  });
+}
+
+function doYellow() {
+  pubnub.publish({
+    channel : "game",
+    message : ["stackChip", "redChip.jpg", place, userr]
+  });
+}
+
 document.getElementById("redChipCountOne").addEventListener("click", function() {
   document.getElementById("final").src = "redChip.jpg";
   document.getElementById("finall").src = "redChip.jpg";
@@ -847,10 +875,7 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("redChipCountOne").style.color == "blue") {
-    pubnub.publish({
-  		channel : "game",
-  		message : ["stackChip", "redChip.jpg", place, userr]
-  	});
+    setTimeout(doRed, 50);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -966,10 +991,7 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("blueChipCountOne").style.color == "blue") {
-    pubnub.publish({
-  		channel : "game",
-  		message : ["stackChip", "blueChip.jpg", place, userr]
-  	});
+    setTimeout(doBlue, 50);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -1085,10 +1107,7 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("greenChipCountOne").style.color == "blue") {
-    pubnub.publish({
-  		channel : "game",
-  		message : ["stackChip", "greenChip.jpg", place, userr]
-  	});
+    setTimeout(doGreen, 50);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
@@ -1204,10 +1223,7 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
     document.getElementById("greenChipCountOne").style.color = "white";
     document.getElementById("yellowChipCountOne").style.color = "white";
   } else if (document.getElementById("yellowChipCountOne").style.color == "blue") {
-    pubnub.publish({
-  		channel : "game",
-  		message : ["stackChip", "yellowChip.jpg", place, userr]
-  	});
+    setTimeout(doYellow, 50);
     segment = "disTrade";
     if (chipSlots[place].src != "") {
       push();
