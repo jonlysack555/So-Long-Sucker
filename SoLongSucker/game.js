@@ -979,10 +979,12 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
   		channel : "game",
   		message : ["elimChip", "blueChip.jpg", userr]
   	});
-    segment = "disTrade";
-    document.getElementById("discard").style.display = "block";
-    document.getElementById("trade").style.display = "block";
-    document.getElementById("done").style.display = "block";
+    if (turnUser == userr) {
+      segment = "disTrade";
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
     document.getElementById("blueChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("blueChipCountOne").innerHTML)-1);
     document.getElementById("redChipCountOne").style.color = "white";
     document.getElementById("blueChipCountOne").style.color = "white";
@@ -1088,10 +1090,12 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
   		channel : "game",
   		message : ["elimChip", "greenChip.jpg", userr]
   	});
-    segment = "disTrade";
-    document.getElementById("discard").style.display = "block";
-    document.getElementById("trade").style.display = "block";
-    document.getElementById("done").style.display = "block";
+    if (turnUser == userr) {
+      segment = "disTrade";
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
     document.getElementById("greenChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("greenChipCountOne").innerHTML)-1);
     document.getElementById("redChipCountOne").style.color = "white";
     document.getElementById("blueChipCountOne").style.color = "white";
@@ -1197,10 +1201,12 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
   		channel : "game",
   		message : ["elimChip", "yellowChip.jpg", userr]
   	});
-    segment = "disTrade";
-    document.getElementById("discard").style.display = "block";
-    document.getElementById("trade").style.display = "block";
-    document.getElementById("done").style.display = "block";
+    if (turnUser == userr) {
+      segment = "disTrade";
+      document.getElementById("discard").style.display = "block";
+      document.getElementById("trade").style.display = "block";
+      document.getElementById("done").style.display = "block";
+    }
     document.getElementById("yellowChipCountOne").innerHTML = JSON.stringify(JSON.parse(document.getElementById("yellowChipCountOne").innerHTML)-1);
     document.getElementById("redChipCountOne").style.color = "white";
     document.getElementById("blueChipCountOne").style.color = "white";
