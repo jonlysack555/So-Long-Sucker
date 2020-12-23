@@ -22,6 +22,7 @@ var yellowChips = [document.getElementById("yellowChipCountOne"), document.getEl
 var segment = "waiting";
 var temp = 0;
 var inStack = [false, false, false, false, ""];
+var placed = false;
 
 var reA = /[^a-zA-Z]/g;
 var reN = /[^0-9]/g;
@@ -279,6 +280,7 @@ pubnub.addListener({
           document.getElementById("finalll").src = "yellowChip.jpg";
         }
       } else if (event.message[0] == "startTurn") {
+        placed = false;
         turnUser = event.message[1];
         if (turnUser == userr) {
           if (document.getElementById("redChipCountOne").innerHTML == "0" && document.getElementById("blueChipCountOne").innerHTML == "0" && document.getElementById("greenChipCountOne").innerHTML == "0" && document.getElementById("yellowChipCountOne").innerHTML == "0") {
@@ -765,6 +767,7 @@ function stackChip() {
 }
 
 function placeChip() {
+  placed = true;
   if (document.getElementById("playOneName").style.color == "red") {
     inStack[0] = true;
   } else if (document.getElementById("playOneName").style.color == "blue") {
@@ -1162,13 +1165,6 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
-    if (document.getElementById("deathPlateTwo").style.display == "block") {
-      document.getElementById("playTwoName").style.background = "black";
-    } else if (document.getElementById("deathPlateThree").style.display == "block") {
-      document.getElementById("playThreeName").style.background = "black";
-    } else if (document.getElementById("deathPlateFour").style.display == "block") {
-      document.getElementById("playFourName").style.background = "black";
-    }
   }
   arrange();
 });
@@ -1286,13 +1282,6 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
-    if (document.getElementById("deathPlateTwo").style.display == "block") {
-      document.getElementById("playTwoName").style.background = "black";
-    } else if (document.getElementById("deathPlateThree").style.display == "block") {
-      document.getElementById("playThreeName").style.background = "black";
-    } else if (document.getElementById("deathPlateFour").style.display == "block") {
-      document.getElementById("playFourName").style.background = "black";
-    }
   }
   arrange();
 });
@@ -1410,13 +1399,6 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
-    if (document.getElementById("deathPlateTwo").style.display == "block") {
-      document.getElementById("playTwoName").style.background = "black";
-    } else if (document.getElementById("deathPlateThree").style.display == "block") {
-      document.getElementById("playThreeName").style.background = "black";
-    } else if (document.getElementById("deathPlateFour").style.display == "block") {
-      document.getElementById("playFourName").style.background = "black";
-    }
   }
   arrange();
 });
@@ -1534,13 +1516,6 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
-    if (document.getElementById("deathPlateTwo").style.display == "block") {
-      document.getElementById("playTwoName").style.background = "black";
-    } else if (document.getElementById("deathPlateThree").style.display == "block") {
-      document.getElementById("playThreeName").style.background = "black";
-    } else if (document.getElementById("deathPlateFour").style.display == "block") {
-      document.getElementById("playFourName").style.background = "black";
-    }
   }
   arrange();
 });
@@ -1568,6 +1543,7 @@ document.getElementById("playOneName").addEventListener("click", function() {
 document.getElementById("playTwoName").addEventListener("click", function() {
   if (userr == turnUser) {
     if (document.getElementById("playTwoName").style.background == "grey") {
+      document.getElementById("deathPlateTwo").style.display == "none";
       if (document.getElementById("redChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : chan,
@@ -1630,6 +1606,7 @@ document.getElementById("playTwoName").addEventListener("click", function() {
 document.getElementById("playThreeName").addEventListener("click", function() {
   if (userr == turnUser) {
     if (document.getElementById("playThreeName").style.background == "grey") {
+      document.getElementById("deathPlateThree").style.display == "none";
       if (document.getElementById("redChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : chan,
@@ -1692,6 +1669,7 @@ document.getElementById("playThreeName").addEventListener("click", function() {
 document.getElementById("playFourName").addEventListener("click", function() {
   if (userr == turnUser) {
     if (document.getElementById("playFourName").style.background == "grey") {
+      document.getElementById("deathPlateFour").style.display == "none";
       if (document.getElementById("redChipCountOne").style.color == "yellow") {
         pubnub.publish({
       		channel : chan,
@@ -1864,24 +1842,164 @@ document.getElementById("done").addEventListener("click", function() {
     } else if (document.getElementById("deathPlateFour").style.display == "block") {
       document.getElementById("playFourName").style.background = "black";
     }
+    if (document.getElementById("playOneName").style.background == "black" && document.getElementById("playTwoName").style.background == "black" && document.getElementById("playThreeName").style.background == "black" && document.getElementById("playFourName").style.background == "black") {
+      var chipOrder = ["", "", "", ""];
+      if (placed == true) {
+        place -= 1;
+      }
+      var t = 0;
+      var p = 0;
+      while ((chipOrder[3] == "" && (JSON.parse((chipSlots[place-p+1].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place-p].style.left).slice(0, -1))) == 3) || p == 0)  {
+        if ((chipSlots[place-p].src).includes("redChip.jpg") && chipOrder[0] != "red" && chipOrder[1] != "red" && chipOrder[2] != "red" && chipOrder[3] != "red") {
+          chipOrder[t] = "red";
+          t += 1;
+        } else if ((chipSlots[place-p].src).includes("blueChip.jpg") && chipOrder[0] != "blue" && chipOrder[1] != "blue" && chipOrder[2] != "blue" && chipOrder[3] != "blue") {
+          chipOrder[t] = "blue";
+          t += 1;
+        } else if ((chipSlots[place-p].src).includes("greenChip.jpg") && chipOrder[0] != "green" && chipOrder[1] != "green" && chipOrder[2] != "green" && chipOrder[3] != "green") {
+          chipOrder[t] = "green";
+          t += 1;
+        } else if ((chipSlots[place-p].src).includes("yellowChip.jpg") && chipOrder[0] != "yellow" && chipOrder[1] != "yellow" && chipOrder[2] != "yellow" && chipOrder[3] != "yellow") {
+          chipOrder[t] = "yellow";
+          t += 1;
+        }
+      }
+      var redd = "no";
+      var bluee = "no";
+      var greenn = "no";
+      var yelloww = "no";
+      if (document.getElementById("deathPlateTwo").style.display == "block") {
+        if (document.getElementById("playTwoName").style.color == "red") {
+          redd = "red";
+        } else if (document.getElementById("playTwoName").style.color == "blue") {
+          bluee = "blue";
+        } else if (document.getElementById("playTwoName").style.color == "green") {
+          greenn = "green";
+        } else if (document.getElementById("playTwoName").style.color == "yellow") {
+          yelloww = "yellow";
+        }
+      } else if (document.getElementById("deathPlateThree").style.display == "block") {
+        if (document.getElementById("playThreeName").style.color == "red") {
+          redd = "red";
+        } else if (document.getElementById("playThreeName").style.color == "blue") {
+          bluee = "blue";
+        } else if (document.getElementById("playThreeName").style.color == "green") {
+          greenn = "green";
+        } else if (document.getElementById("playThreeName").style.color == "yellow") {
+          yelloww = "yellow";
+        }
+      } else if (document.getElementById("deathPlateFour").style.display == "block") {
+        if (document.getElementById("playFourName").style.color == "red") {
+          redd = "red";
+        } else if (document.getElementById("playFourName").style.color == "blue") {
+          bluee = "blue";
+        } else if (document.getElementById("playFourName").style.color == "green") {
+          greenn = "green";
+        } else if (document.getElementById("playFourName").style.color == "yellow") {
+          yelloww = "yellow";
+        }
+      }
+      if (chipOrder[3] != "" && chipOrder[3] != redd && chipOrder[3] != bluee && chipOrder[3] != greenn && chipOrder[3] != yelloww) {
+        if (document.getElementById("playTwoName").style.color == chipOrder[3]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "white";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playThreeName").style.color == chipOrder[3]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "white";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playFourName").style.color == chipOrder[3]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "white";
+        }
+      } else if (chipOrder[2] != "" && chipOrder[2] != redd && chipOrder[2] != bluee && chipOrder[2] != greenn && chipOrder[2] != yelloww) {
+        if (document.getElementById("playTwoName").style.color == chipOrder[2]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "white";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playThreeName").style.color == chipOrder[2]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "white";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playFourName").style.color == chipOrder[2]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "white";
+        }
+      } else if (chipOrder[1] != "" && chipOrder[1] != redd && chipOrder[1] != bluee && chipOrder[1] != greenn && chipOrder[1] != yelloww) {
+        if (document.getElementById("playTwoName").style.color == chipOrder[1]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "white";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playThreeName").style.color == chipOrder[1]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "white";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playFourName").style.color == chipOrder[1]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "white";
+        }
+      } else if (chipOrder[0] != "" && chipOrder[0] != redd && chipOrder[0] != bluee && chipOrder[0] != greenn && chipOrder[0] != yelloww) {
+        if (document.getElementById("playTwoName").style.color == chipOrder[0]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "white";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playThreeName").style.color == chipOrder[0]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "white";
+          document.getElementById("playFourName").style.background = "black";
+        } else if (document.getElementById("playFourName").style.color == chipOrder[0]) {
+          document.getElementById("playOneName").style.background = "black";
+          document.getElementById("playTwoName").style.background = "black";
+          document.getElementById("playThreeName").style.background = "black";
+          document.getElementById("playFourName").style.background = "white";
+        }
+      }
+      placed = false;
+    }
   } else {
     if (thisTurn == "one") {
       document.getElementById("playOneName").style.background = "white";
+      document.getElementById("playTwoName").style.background = "black";
+      document.getElementById("playThreeName").style.background = "black";
+      document.getElementById("playFourName").style.background = "black";
     } else if (thisTurn == "two") {
       if (document.getElementById("deathPlateTwo").style.display == "block") {
-        thisTurn == "one";
+        document.getElementById("playOneName").style.background = "white";
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
       } else {
         document.getElementById("playTwoName").style.background = "white";
       }
     } else if (thisTurn == "three") {
       if (document.getElementById("deathPlateThree").style.display == "block") {
-        thisTurn == "one";
+        document.getElementById("playOneName").style.background = "white";
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
       } else {
         document.getElementById("playThreeName").style.background = "white";
       }
     } else if (thisTurn == "four") {
       if (document.getElementById("deathPlateFour").style.display == "block") {
-        thisTurn == "one";
+        document.getElementById("playOneName").style.background = "white";
+        document.getElementById("playTwoName").style.background = "black";
+        document.getElementById("playThreeName").style.background = "black";
+        document.getElementById("playFourName").style.background = "black";
       } else {
         document.getElementById("playFourName").style.background = "white";
       }
