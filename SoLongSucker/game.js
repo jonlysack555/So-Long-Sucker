@@ -938,46 +938,86 @@ function capture(place) {
     c -= 1;
   }
   console.log(c);
-  while (c < 1) {
-    if ((chipSlots[place+c].src).includes("redChip.jpg")) {
-      redChips[player].innerHTML = JSON.stringify(JSON.parse(redChips[player].innerHTML)+1);
-      chipSlots[place+c].removeAttribute("src");
-      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+  if ((player == 0 && document.getElementById("deathPlateOne").style.display == "block") || (player == 1 && document.getElementById("deathPlateTwo").style.display == "block") || (player == 2 && document.getElementById("deathPlateThree").style.display == "block") || (player == 3 && document.getElementById("deathPlateFour").style.display == "block")) {
+    while (c < 1) {
+      if ((chipSlots[place+c].src).includes("redChip.jpg")) {
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
 
-      } else {
-        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
-      }
-      redChips[player].style.color = "red";
-    } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
-      blueChips[player].innerHTML = JSON.stringify(JSON.parse(blueChips[player].innerHTML)+1);
-      chipSlots[place+c].removeAttribute("src");
-      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+      } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
 
-      } else {
-        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
-      }
-      blueChips[player].style.color = "red";
-    } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
-      greenChips[player].innerHTML = JSON.stringify(JSON.parse(greenChips[player].innerHTML)+1);
-      chipSlots[place+c].removeAttribute("src");
-      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+      } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
 
-      } else {
-        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
-      }
-      greenChips[player].style.color = "red";
-    } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
-      yellowChips[player].innerHTML = JSON.stringify(JSON.parse(yellowChips[player].innerHTML)+1);
-      chipSlots[place+c].removeAttribute("src");
-      if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+      } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
 
-      } else {
-        chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
       }
-      yellowChips[player].style.color = "red";
+      console.log(c);
+      c += 1;
     }
-    console.log(c);
-    c += 1;
+  } else {
+    segment = "disTrade";
+    while (c < 1) {
+      if ((chipSlots[place+c].src).includes("redChip.jpg")) {
+        redChips[player].innerHTML = JSON.stringify(JSON.parse(redChips[player].innerHTML)+1);
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+        redChips[player].style.color = "red";
+      } else if ((chipSlots[place+c].src).includes("blueChip.jpg")) {
+        blueChips[player].innerHTML = JSON.stringify(JSON.parse(blueChips[player].innerHTML)+1);
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+        blueChips[player].style.color = "red";
+      } else if ((chipSlots[place+c].src).includes("greenChip.jpg")) {
+        greenChips[player].innerHTML = JSON.stringify(JSON.parse(greenChips[player].innerHTML)+1);
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+        greenChips[player].style.color = "red";
+      } else if ((chipSlots[place+c].src).includes("yellowChip.jpg")) {
+        yellowChips[player].innerHTML = JSON.stringify(JSON.parse(yellowChips[player].innerHTML)+1);
+        chipSlots[place+c].removeAttribute("src");
+        if (c == 0 && (JSON.parse((chipSlots[place+c+2].style.left).slice(0, -1)))-(JSON.parse((chipSlots[place+c+1].style.left).slice(0, -1))) != 3) {
+
+        } else {
+          chipSlots[place+c+1].style.left = JSON.stringify(JSON.parse((chipSlots[place+c].style.left).slice(0, -1))+14)+"%";
+        }
+        yellowChips[player].style.color = "red";
+      }
+      console.log(c);
+      c += 1;
+    }
+    document.getElementById("discard").style.display = "block";
+    document.getElementById("trade").style.display = "block";
+    document.getElementById("done").style.display = "block";
   }
 }
 
@@ -1122,6 +1162,13 @@ document.getElementById("redChipCountOne").addEventListener("click", function() 
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
+    if (document.getElementById("deathPlateTwo").style.display == "block") {
+      document.getElementById("playTwoName").style.background = "black";
+    } else if (document.getElementById("deathPlateThree").style.display == "block") {
+      document.getElementById("playThreeName").style.background = "black";
+    } else if (document.getElementById("deathPlateFour").style.display == "block") {
+      document.getElementById("playFourName").style.background = "black";
+    }
   }
   arrange();
 });
@@ -1239,6 +1286,13 @@ document.getElementById("blueChipCountOne").addEventListener("click", function()
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
+    if (document.getElementById("deathPlateTwo").style.display == "block") {
+      document.getElementById("playTwoName").style.background = "black";
+    } else if (document.getElementById("deathPlateThree").style.display == "block") {
+      document.getElementById("playThreeName").style.background = "black";
+    } else if (document.getElementById("deathPlateFour").style.display == "block") {
+      document.getElementById("playFourName").style.background = "black";
+    }
   }
   arrange();
 });
@@ -1356,6 +1410,13 @@ document.getElementById("greenChipCountOne").addEventListener("click", function(
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
+    if (document.getElementById("deathPlateTwo").style.display == "block") {
+      document.getElementById("playTwoName").style.background = "black";
+    } else if (document.getElementById("deathPlateThree").style.display == "block") {
+      document.getElementById("playThreeName").style.background = "black";
+    } else if (document.getElementById("deathPlateFour").style.display == "block") {
+      document.getElementById("playFourName").style.background = "black";
+    }
   }
   arrange();
 });
@@ -1473,6 +1534,13 @@ document.getElementById("yellowChipCountOne").addEventListener("click", function
     document.getElementById("playTwoName").style.background = "grey";
     document.getElementById("playThreeName").style.background = "grey";
     document.getElementById("playFourName").style.background = "grey";
+    if (document.getElementById("deathPlateTwo").style.display == "block") {
+      document.getElementById("playTwoName").style.background = "black";
+    } else if (document.getElementById("deathPlateThree").style.display == "block") {
+      document.getElementById("playThreeName").style.background = "black";
+    } else if (document.getElementById("deathPlateFour").style.display == "block") {
+      document.getElementById("playFourName").style.background = "black";
+    }
   }
   arrange();
 });
@@ -1789,15 +1857,34 @@ document.getElementById("done").addEventListener("click", function() {
         document.getElementById("playFourName").style.background = "white";
       }
     }
+    if (document.getElementById("deathPlateTwo").style.display == "block") {
+      document.getElementById("playTwoName").style.background = "black";
+    } else if (document.getElementById("deathPlateThree").style.display == "block") {
+      document.getElementById("playThreeName").style.background = "black";
+    } else if (document.getElementById("deathPlateFour").style.display == "block") {
+      document.getElementById("playFourName").style.background = "black";
+    }
   } else {
     if (thisTurn == "one") {
       document.getElementById("playOneName").style.background = "white";
     } else if (thisTurn == "two") {
-      document.getElementById("playTwoName").style.background = "white";
+      if (document.getElementById("deathPlateTwo").style.display == "block") {
+        thisTurn == "one";
+      } else {
+        document.getElementById("playTwoName").style.background = "white";
+      }
     } else if (thisTurn == "three") {
-      document.getElementById("playThreeName").style.background = "white";
+      if (document.getElementById("deathPlateThree").style.display == "block") {
+        thisTurn == "one";
+      } else {
+        document.getElementById("playThreeName").style.background = "white";
+      }
     } else if (thisTurn == "four") {
-      document.getElementById("playFourName").style.background = "white";
+      if (document.getElementById("deathPlateFour").style.display == "block") {
+        thisTurn == "one";
+      } else {
+        document.getElementById("playFourName").style.background = "white";
+      }
     }
   }
   document.getElementById("discard").style.display = "none";
