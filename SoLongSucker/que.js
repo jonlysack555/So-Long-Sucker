@@ -8,6 +8,10 @@ var newPlayUsername = "";
 var readies = 0;
 var gameArray = [["", ""], ["", ""], ["", ""], ["", ""]];
 var starting = false;
+document.getElementById("playOneUser").style.fontSize = JSON.stringify(JSON.parse((window.innerHeight)*0.07)) + "px";
+document.getElementById("playTwoUser").style.fontSize = JSON.stringify(JSON.parse((window.innerHeight)*0.07)) + "px";
+document.getElementById("playThreeUser").style.fontSize = JSON.stringify(JSON.parse((window.innerHeight)*0.07)) + "px";
+document.getElementById("playFourUser").style.fontSize = JSON.stringify(JSON.parse((window.innerHeight)*0.07)) + "px";
 
 const pubnub = new PubNub({
   publishKey: "pub-c-c03147c7-bee2-4479-8823-b5669448d70a",
