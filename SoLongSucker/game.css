@@ -279,17 +279,24 @@
   left: 5px;
 }
 
-.chipOne, .chipTwo, .chipThree, .chipFour {
-  width: 80px;
-  height: 80px;
+.chipOne, .chipThree {
+  height: 11vh;
+  width: 11vh;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.chipTwo, .chipFour {
+  height: 11vh;
+  width: 11vh;
   border-radius: 50%;
   position: absolute;
 }
 
 .chipCountOne, .chipCountTwo, .chipCountThree, .chipCountFour {
-  font-size: 60px;
+  font-size: 8.5vh;
   color: white;
-  width: 80px;
+  width: 11vh;
   text-align: center;
   position: absolute;
 }
