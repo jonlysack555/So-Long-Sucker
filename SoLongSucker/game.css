@@ -37,21 +37,22 @@
   position: absolute;
   width: 40%;
   left: 30%;
-  height: 50%;
+  min-height: 50%;
   top: 25%;
   border: solid;
   border-width: 8px;
-  border-radius: 40px;
+  border-radius: 10vh;
 }
 
 #winMessage {
   width: 80%;
   left: 10%;
   text-align: center;
-  font-size: 30px;
-  height: 20%;
-  top: 30%;
+  font-size: 6vh;
   position: absolute;
+  vertical-align: middle;
+  margin-top: 15vh;
+  margin-bottom: 15vh;
 }
 
 .playSpace {
