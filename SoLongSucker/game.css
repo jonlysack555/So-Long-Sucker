@@ -554,7 +554,7 @@
 }
 
 .disTrade {
-  display: block;
+  display: none;
   width: 9vh;
   height: 3vh;
   background-color: white;
