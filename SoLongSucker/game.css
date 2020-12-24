@@ -302,63 +302,63 @@
 }
 
 #redChipOne {
-  top: 50%;
+  bottom: 3vh;
   left: 15%;
 }
 
 #blueChipOne {
   left: 35%;
-  top: 50%;
+  bottom: 3vh;
 }
 
 #greenChipOne {
   left: 55%;
-  top: 50%;
+  bottom: 3vh;
 }
 
 #yellowChipOne {
   left: 75%;
-  top: 50%;
+  bottom: 3vh;
 }
 
 #redChipCountOne {
-  top: 22%;
+  top: 5.85vh;
   left: 15%;
 }
 
 #blueChipCountOne {
   left: 35%;
-  top: 22%;
+  top: 5.85vh;
 }
 
 #greenChipCountOne {
   left: 55%;
-  top: 22%;
+  top: 5.85vh;
 }
 
 #yellowChipCountOne {
   left: 75%;
-  top: 22%;
+  top: 5.85vh;
 }
 
 #redChipTwo {
-  left: 8%;
-  top: 12%;
+  left: 3vh;
+  top: 6vh;
 }
 
 #blueChipTwo {
-  left: 8%;
-  top: 32%;
+  left: 3vh;
+  top: 22vh;
 }
 
 #greenChipTwo {
-  left: 8%;
-  top: 52%;
+  left: 3vh;
+  bottom: 22vh;
 }
 
 #yellowChipTwo {
-  left: 8%;
-  top: 72%;
+  left: 3vh;
+  bottom: 6vh;
 }
 
 .chipCountTwo {
@@ -366,43 +366,43 @@
 }
 
 #redChipCountTwo {
-  left: 8%;
-  top: 1%;
+  left: 3vh;
+  bottom: 45vh;
 }
 
 #blueChipCountTwo {
-  left: 8%;
-  top: 21%;
+  left: 3vh;
+  bottom: 29vh;
 }
 
 #greenChipCountTwo {
-  left: 8%;
-  top: 41%;
+  left: 3vh;
+  bottom: 14.5vh;
 }
 
 #yellowChipCountTwo {
-  left: 8%;
-  top: 61%;
+  left: 3vh;
+  bottom: -1.5vh;
 }
 
 #redChipThree {
   left: 75%;
-  top: 10%;
+  top: 3vh;
 }
 
 #blueChipThree {
   left: 55%;
-  top: 10%;
+  top: 3vh;
 }
 
 #greenChipThree {
   left: 35%;
-  top: 10%;
+  top: 3vh;
 }
 
 #yellowChipThree {
   left: 15%;
-  top: 10%;
+  top: 3vh;
 }
 
 .chipCountThree {
@@ -411,42 +411,42 @@
 
 #redChipCountThree {
   left: 75%;
-  bottom: 23%;
+  bottom: 5.85vh;
 }
 
 #blueChipCountThree {
   left: 55%;
-  bottom: 23%;
+  bottom: 5.85vh;
 }
 
 #greenChipCountThree {
   left: 35%;
-  bottom: 23%;
+  bottom: 5.85vh;
 }
 
 #yellowChipCountThree {
   left: 15%;
-  bottom: 23%;
+  bottom: 5.85vh;
 }
 
 #redChipFour {
-  right: 8%;
-  bottom: 12%;
+  right: 3vh;
+  bottom: 6vh;
 }
 
 #blueChipFour {
-  right: 8%;
-  bottom: 32%;
+  right: 3vh;
+  bottom: 22vh;
 }
 
 #greenChipFour {
-  right: 8%;
-  bottom: 52%;
+  right: 3vh;
+  top: 22vh;
 }
 
 #yellowChipFour {
-  right: 8%;
-  bottom: 72%;
+  right: 3vh;
+  top: 6vh;
 }
 
 .chipCountFour {
@@ -454,23 +454,23 @@
 }
 
 #redChipCountFour {
-  right: 8%;
-  bottom: 1%;
+  right: 3vh;
+  bottom: -1.5vh;
 }
 
 #blueChipCountFour {
-  right: 8%;
-  bottom: 21%;
+  right: 3vh;
+  bottom: 14.5vh;
 }
 
 #greenChipCountFour {
-  right: 8%;
-  bottom: 41%;
+  right: 3vh;
+  bottom: 29vh;
 }
 
 #yellowChipCountFour {
-  right: 8%;
-  bottom: 61%;
+  right: 3vh;
+  bottom: 45vh;
 }
 
 .use {
@@ -481,63 +481,64 @@
 .turnPlate {
   color: white;
   position: absolute;
-  font-size: 50px;
+  font-size: 7.5vh;
   font-weight: bold;
   display: none;
 }
 
 #turnPlateOne {
-  right: 5%;
-  top: -25%;
+  right: 4vh;
+  top: -7vh;
 }
 
 #turnPlateTwo {
   transform: rotate(90deg);
-  bottom: 10%;
-  right: -35%;
+  bottom: 8vh;
+  right: -12vh;
 }
 
 #turnPlateThree {
   transform: rotate(180deg);
-  left: 5%;
-  bottom: -25%;
+  left: 4vh;
+  bottom: -7vh;
 }
 
 #turnPlateFour {
   transform: rotate(270deg);
-  top: 10%;
-  left: -35%;
+  top: 8vh;
+  left: -12vh;
 }
 
 .deathPlate {
   color: white;
   position: absolute;
-  font-size: 50px;
+  font-size: 7.5vh;
   font-weight: bold;
   display: none;
+  white-space: nowrap;
 }
 
 #deathPlateOne {
-  right: 5%;
-  top: -25%;
+  right: 4vh;
+  top: -7vh;
 }
 
 #deathPlateTwo {
   transform: rotate(90deg);
-  bottom: 15%;
-  right: -45%;
+  bottom: 10vh;
+  right: -15vh;
 }
 
 #deathPlateThree {
   transform: rotate(180deg);
-  left: 5%;
-  bottom: -25%;
+  left: 4vh;
+  bottom: -7vh;
 }
 
 #deathPlateFour {
   transform: rotate(270deg);
-  top: 15%;
-  left: -45%;
+  top: 10vh;
+  left: -15vh;
 }
 
 #final {
@@ -553,21 +554,23 @@
 }
 
 .disTrade {
-  display: none;
-  width: 10%;
-  height: 10%;
+  display: block;
+  width: 9vh;
+  height: 3vh;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 8vh;
   border: solid;
   border-color: black;
   border-width: 1px;
   opacity: 0.8;
+  text-align: center;
+  font-size: 2vh;
 }
 
 #discard {
   position: absolute;
-  top: 15%;
-  left: 20%;
+  top: 4.5vh;
+  left: 15vh;
 }
 
 #discard:hover {
@@ -577,8 +580,8 @@
 
 #trade {
   position: absolute;
-  top: 15%;
-  left: 40%;
+  top: 4.5vh;
+  left: 31vh;
 }
 
 #trade:hover {
@@ -588,8 +591,8 @@
 
 #done {
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 9vh;
+  left: 23vh;
 }
 
 #done:hover {
